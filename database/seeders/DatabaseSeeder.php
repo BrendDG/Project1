@@ -20,9 +20,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        // Seed nieuws items
+        // Seed nieuws items en FAQ
         $this->call([
             NieuwsSeeder::class,
+            FaqSeeder::class,
         ]);
     }
 }
