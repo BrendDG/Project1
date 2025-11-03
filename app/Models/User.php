@@ -73,7 +73,7 @@ class User extends Authenticatable
     public function getProfilePhotoUrlAttribute(): string
     {
         return $this->profile_photo
-            ? asset('storage/' . $this->profile_photo)
+            ? asset($this->profile_photo)
             : asset('default-avatar.png');
     }
 

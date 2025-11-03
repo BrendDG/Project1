@@ -5,6 +5,8 @@ use App\Http\Controllers\NieuwsController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PlayersController;
+use App\Http\Controllers\StorageController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -23,6 +25,17 @@ Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 // Contact routes (publiek toegankelijk)
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+// Players routes (publiek toegankelijk - iedereen kan spelers zoeken en bekijken)
+Route::prefix('players')->name('players.')->group(function () {
+    Route::get('/', [PlayersController::class, 'index'])->name('index');
+    Route::get('/{user}', [PlayersController::class, 'show'])->name('show');
+});
+
+// Storage route for serving uploaded files (fallback if storage:link doesn't work)
+Route::get('/storage/{path}', [StorageController::class, 'serve'])
+    ->where('path', '.*')
+    ->name('storage.serve');
 
 // Authentication routes (guest only)
 Route::middleware('guest')->group(function () {
