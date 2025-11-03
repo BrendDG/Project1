@@ -37,6 +37,6 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect('/')->with('success', 'Welkom bij Rocket League Tracker, ' . $user->name . '!');
+        return redirect()->route('profile.show', $user)->with('success', 'Welkom bij Rocket League Tracker, ' . $user->name . '!');
     }
 }

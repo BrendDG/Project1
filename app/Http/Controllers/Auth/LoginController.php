@@ -31,7 +31,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/')->with('success', 'Welkom terug, ' . Auth::user()->display_name . '!');
+            return redirect()->intended(route('profile.show', Auth::user()))->with('success', 'Welkom terug, ' . Auth::user()->display_name . '!');
         }
 
         return back()->withErrors([
