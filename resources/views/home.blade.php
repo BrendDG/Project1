@@ -1,71 +1,13 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rocket League Community - Home</title>
-    <style>
+@extends('layouts.app')
+
+@section('title', 'Rocket League Community - Home')
+
+@section('styles')
+<style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #1a1f35;
-            color: #e0e0e0;
-            min-height: 100vh;
-        }
-
-        /* Header */
-        header {
-            background: #0f1220;
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid #2a3150;
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 2rem;
-            font-weight: bold;
-            color: #4a9eff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .logo-img {
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #c0c0c0;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            padding: 0.5rem 1rem;
-        }
-
-        .nav-links a:hover {
-            color: #4a9eff;
         }
 
         /* Hero Section */
@@ -211,19 +153,6 @@
             font-size: 1.1rem;
         }
 
-        /* Footer */
-        footer {
-            background: #0f1220;
-            padding: 2rem;
-            text-align: center;
-            margin-top: 4rem;
-            border-top: 1px solid #2a3150;
-        }
-
-        footer p {
-            color: #9095a0;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
@@ -242,26 +171,13 @@
                 width: 100%;
             }
         }
-    </style>
-</head>
-<body>
-    <!-- Header/Navigation -->
-    <header>
-        <nav>
-            <div class="logo">
-                <img src="{{ asset('RL-Logo.png') }}" alt="Rocket League Logo" class="logo-img">
-                Rocket League Tracker
-            </div>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/nieuws">Nieuws</a></li>
-                <li><a href="/spelers">Spelers</a></li>
-                <li><a href="/faq">FAQ</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/login">Login</a></li>
-            </ul>
-        </nav>
-    </header>
+</style>
+@endsection
+
+@section('content')
+    @if (session('success'))
+        <x-alert type="success" :message="session('success')" />
+    @endif
 
     <!-- Hero Section -->
     <section class="hero">
@@ -271,8 +187,13 @@
             Volg de laatste nieuwtjes, bekijk speler profielen, toernooien en meer.
         </p>
         <div class="cta-buttons">
-            <a href="/register" class="btn btn-primary">Word Lid</a>
-            <a href="/nieuws" class="btn btn-secondary">Laatste Nieuws</a>
+            @auth
+                <a href="{{ route('profile.show', auth()->user()) }}" class="btn btn-primary">Mijn Profiel</a>
+                <a href="{{ route('nieuws.index') }}" class="btn btn-secondary">Laatste Nieuws</a>
+            @else
+                <a href="{{ route('register') }}" class="btn btn-primary">Word Lid</a>
+                <a href="{{ route('nieuws.index') }}" class="btn btn-secondary">Laatste Nieuws</a>
+            @endauth
         </div>
     </section>
 
@@ -280,7 +201,7 @@
     <section class="features">
         <h2>Wat We Bieden</h2>
         <div class="features-grid">
-            <a href="/nieuws" class="feature-card">
+            <a href="{{ route('nieuws.index') }}" class="feature-card">
                 <div class="feature-icon">📰</div>
                 <h3>Laatste Nieuws</h3>
                 <p>
@@ -288,15 +209,25 @@
                 </p>
             </a>
 
-            <a href="/spelers" class="feature-card">
-                <div class="feature-icon">👤</div>
-                <h3>Speler Profielen</h3>
-                <p>
-                    Creëer je eigen profiel, deel je stats en laat zien welke rank je hebt bereikt.
-                </p>
-            </a>
+            @auth
+                <a href="{{ route('profile.show', auth()->user()) }}" class="feature-card">
+                    <div class="feature-icon">👤</div>
+                    <h3>Mijn Profiel</h3>
+                    <p>
+                        Bekijk en bewerk je profiel, deel je stats en laat zien welke rank je hebt bereikt.
+                    </p>
+                </a>
+            @else
+                <a href="{{ route('register') }}" class="feature-card">
+                    <div class="feature-icon">👤</div>
+                    <h3>Speler Profielen</h3>
+                    <p>
+                        Creëer je eigen profiel, deel je stats en laat zien welke rank je hebt bereikt.
+                    </p>
+                </a>
+            @endauth
 
-            <a href="/toernooien" class="feature-card">
+            <a href="#" class="feature-card">
                 <div class="feature-icon">🏆</div>
                 <h3>Toernooien</h3>
                 <p>
@@ -304,7 +235,7 @@
                 </p>
             </a>
 
-            <a href="/ranked" class="feature-card">
+            <a href="#" class="feature-card">
                 <div class="feature-icon">📊</div>
                 <h3>Ranked Systeem</h3>
                 <p>
@@ -312,7 +243,7 @@
                 </p>
             </a>
 
-            <a href="/faq" class="feature-card">
+            <a href="{{ route('faq.index') }}" class="feature-card">
                 <div class="feature-icon">❓</div>
                 <h3>FAQ & Guides</h3>
                 <p>
@@ -320,7 +251,7 @@
                 </p>
             </a>
 
-            <a href="/community" class="feature-card">
+            <a href="{{ route('contact.index') }}" class="feature-card">
                 <div class="feature-icon">💬</div>
                 <h3>Community</h3>
                 <p>
@@ -351,11 +282,4 @@
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Rocket League Community. Gemaakt met Laravel 12.</p>
-        <p>Dit is een fan-made website en is niet officieel geaffilieerd met Psyonix of Epic Games.</p>
-    </footer>
-</body>
-</html>
+@endsection
