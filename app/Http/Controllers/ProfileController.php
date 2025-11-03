@@ -47,6 +47,13 @@ class ProfileController extends Controller
             'birthday' => ['nullable', 'date', 'before:today'],
             'about_me' => ['nullable', 'string', 'max:1000'],
             'profile_photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'mmr_1v1' => ['nullable', 'integer', 'min:0', 'max:3000'],
+            'mmr_2v2' => ['nullable', 'integer', 'min:0', 'max:3000'],
+            'mmr_3v3' => ['nullable', 'integer', 'min:0', 'max:3000'],
+            'mmr_hoops' => ['nullable', 'integer', 'min:0', 'max:3000'],
+            'mmr_rumble' => ['nullable', 'integer', 'min:0', 'max:3000'],
+            'mmr_dropshot' => ['nullable', 'integer', 'min:0', 'max:3000'],
+            'mmr_snowday' => ['nullable', 'integer', 'min:0', 'max:3000'],
         ]);
 
         // Handle profile photo upload

@@ -97,6 +97,46 @@
         font-style: italic;
     }
 
+    .mmr-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .mmr-card {
+        background: #1a1f35;
+        padding: 1.5rem;
+        border-radius: 8px;
+        border: 1px solid #2a3150;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .mmr-card:hover {
+        border-color: #4a9eff;
+        transform: translateY(-3px);
+    }
+
+    .mmr-mode {
+        color: #9095a0;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+    .mmr-rank {
+        color: #4a9eff;
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    .mmr-value {
+        color: #c0c0c0;
+        font-size: 1rem;
+    }
+
     .edit-button {
         display: inline-block;
         padding: 0.75rem 1.5rem;
@@ -172,6 +212,69 @@
                     <p class="empty-state">Deze gebruiker heeft nog geen "over mij" tekst toegevoegd.</p>
                 @endif
             </div>
+
+            @if ($user->mmr_1v1 || $user->mmr_2v2 || $user->mmr_3v3 || $user->mmr_hoops || $user->mmr_rumble || $user->mmr_dropshot || $user->mmr_snowday)
+                <div class="profile-section">
+                    <h2>Ranked Stats</h2>
+                    <div class="mmr-grid">
+                        @if ($user->mmr_1v1)
+                            <div class="mmr-card">
+                                <div class="mmr-mode">1v1 Duel</div>
+                                <div class="mmr-rank">{{ $user->getRankFromMMR($user->mmr_1v1) }}</div>
+                                <div class="mmr-value">{{ $user->mmr_1v1 }} MMR</div>
+                            </div>
+                        @endif
+
+                        @if ($user->mmr_2v2)
+                            <div class="mmr-card">
+                                <div class="mmr-mode">2v2 Doubles</div>
+                                <div class="mmr-rank">{{ $user->getRankFromMMR($user->mmr_2v2) }}</div>
+                                <div class="mmr-value">{{ $user->mmr_2v2 }} MMR</div>
+                            </div>
+                        @endif
+
+                        @if ($user->mmr_3v3)
+                            <div class="mmr-card">
+                                <div class="mmr-mode">3v3 Standard</div>
+                                <div class="mmr-rank">{{ $user->getRankFromMMR($user->mmr_3v3) }}</div>
+                                <div class="mmr-value">{{ $user->mmr_3v3 }} MMR</div>
+                            </div>
+                        @endif
+
+                        @if ($user->mmr_hoops)
+                            <div class="mmr-card">
+                                <div class="mmr-mode">Hoops</div>
+                                <div class="mmr-rank">{{ $user->getRankFromMMR($user->mmr_hoops) }}</div>
+                                <div class="mmr-value">{{ $user->mmr_hoops }} MMR</div>
+                            </div>
+                        @endif
+
+                        @if ($user->mmr_rumble)
+                            <div class="mmr-card">
+                                <div class="mmr-mode">Rumble</div>
+                                <div class="mmr-rank">{{ $user->getRankFromMMR($user->mmr_rumble) }}</div>
+                                <div class="mmr-value">{{ $user->mmr_rumble }} MMR</div>
+                            </div>
+                        @endif
+
+                        @if ($user->mmr_dropshot)
+                            <div class="mmr-card">
+                                <div class="mmr-mode">Dropshot</div>
+                                <div class="mmr-rank">{{ $user->getRankFromMMR($user->mmr_dropshot) }}</div>
+                                <div class="mmr-value">{{ $user->mmr_dropshot }} MMR</div>
+                            </div>
+                        @endif
+
+                        @if ($user->mmr_snowday)
+                            <div class="mmr-card">
+                                <div class="mmr-mode">Snow Day</div>
+                                <div class="mmr-rank">{{ $user->getRankFromMMR($user->mmr_snowday) }}</div>
+                                <div class="mmr-value">{{ $user->mmr_snowday }} MMR</div>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 @endsection

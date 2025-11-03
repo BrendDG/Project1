@@ -41,6 +41,7 @@
     .form-group input[type="text"],
     .form-group input[type="email"],
     .form-group input[type="date"],
+    .form-group input[type="number"],
     .form-group textarea {
         width: 100%;
         padding: 0.875rem 1rem;
@@ -179,6 +180,53 @@
                     <small id="charCount">{{ strlen(old('about_me', $user->about_me ?? '')) }}/1000 tekens</small>
                 </div>
 
+                <h3 style="color: #4a9eff; margin-top: 2rem; margin-bottom: 1rem; font-size: 1.25rem;">Ranked MMR</h3>
+                <p style="color: #9095a0; margin-bottom: 1.5rem; font-size: 0.95rem;">Vul je MMR in voor elke gamemode (optioneel)</p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                    <div class="form-group">
+                        <label for="mmr_1v1">1v1 Duel</label>
+                        <input type="number" id="mmr_1v1" name="mmr_1v1" value="{{ old('mmr_1v1', $user->mmr_1v1) }}" min="0" max="3000" placeholder="bijv. 1200">
+                        <small>MMR tussen 0-3000</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mmr_2v2">2v2 Doubles</label>
+                        <input type="number" id="mmr_2v2" name="mmr_2v2" value="{{ old('mmr_2v2', $user->mmr_2v2) }}" min="0" max="3000" placeholder="bijv. 1200">
+                        <small>MMR tussen 0-3000</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mmr_3v3">3v3 Standard</label>
+                        <input type="number" id="mmr_3v3" name="mmr_3v3" value="{{ old('mmr_3v3', $user->mmr_3v3) }}" min="0" max="3000" placeholder="bijv. 1200">
+                        <small>MMR tussen 0-3000</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mmr_hoops">Hoops</label>
+                        <input type="number" id="mmr_hoops" name="mmr_hoops" value="{{ old('mmr_hoops', $user->mmr_hoops) }}" min="0" max="3000" placeholder="bijv. 1000">
+                        <small>MMR tussen 0-3000</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mmr_rumble">Rumble</label>
+                        <input type="number" id="mmr_rumble" name="mmr_rumble" value="{{ old('mmr_rumble', $user->mmr_rumble) }}" min="0" max="3000" placeholder="bijv. 1000">
+                        <small>MMR tussen 0-3000</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mmr_dropshot">Dropshot</label>
+                        <input type="number" id="mmr_dropshot" name="mmr_dropshot" value="{{ old('mmr_dropshot', $user->mmr_dropshot) }}" min="0" max="3000" placeholder="bijv. 1000">
+                        <small>MMR tussen 0-3000</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mmr_snowday">Snow Day</label>
+                        <input type="number" id="mmr_snowday" name="mmr_snowday" value="{{ old('mmr_snowday', $user->mmr_snowday) }}" min="0" max="3000" placeholder="bijv. 1000">
+                        <small>MMR tussen 0-3000</small>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="profile_photo">Profielfoto</label>
                     <input type="file" id="profile_photo" name="profile_photo" accept="image/jpeg,image/png,image/jpg,image/gif">
@@ -269,6 +317,16 @@
                 errors.push('Verjaardag moet in het verleden liggen.');
             }
         }
+
+        // MMR validatie
+        const mmrFields = ['mmr_1v1', 'mmr_2v2', 'mmr_3v3', 'mmr_hoops', 'mmr_rumble', 'mmr_dropshot', 'mmr_snowday'];
+        mmrFields.forEach(field => {
+            const value = document.getElementById(field).value;
+            if (value !== '' && (value < 0 || value > 3000 || !Number.isInteger(Number(value)))) {
+                isValid = false;
+                errors.push(`${field.replace('mmr_', '').toUpperCase()} MMR moet een geheel getal tussen 0 en 3000 zijn.`);
+            }
+        });
 
         if (!isValid) {
             e.preventDefault();
