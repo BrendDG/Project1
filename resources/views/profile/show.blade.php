@@ -121,20 +121,32 @@
     .mmr-mode {
         color: #9095a0;
         font-size: 0.9rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 1rem;
         font-weight: 500;
+    }
+
+    .rank-icon {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 1rem;
     }
 
     .mmr-rank {
         color: #4a9eff;
-        font-size: 1.25rem;
+        font-size: 1.1rem;
         font-weight: bold;
+        margin-bottom: 0.25rem;
+    }
+
+    .mmr-division {
+        color: #9095a0;
+        font-size: 0.9rem;
         margin-bottom: 0.5rem;
     }
 
     .mmr-value {
         color: #c0c0c0;
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
 
     .edit-button {
@@ -213,14 +225,18 @@
                 @endif
             </div>
 
-            @if ($user->mmr_1v1 || $user->mmr_2v2 || $user->mmr_3v3 || $user->mmr_hoops || $user->mmr_rumble || $user->mmr_dropshot || $user->mmr_snowday)
+            @if ($user->mmr_1v1 || $user->mmr_2v2 || $user->mmr_3v3 || $user->mmr_hoops || $user->mmr_rumble || $user->mmr_dropshot || $user->mmr_snowday || $user->mmr_tournament)
                 <div class="profile-section">
                     <h2>Ranked Stats</h2>
                     <div class="mmr-grid">
                         @if ($user->mmr_1v1)
                             <div class="mmr-card">
                                 <div class="mmr-mode">1v1 Duel</div>
+                                <img src="{{ $user->getRankImage($user->mmr_1v1) }}" alt="Rank Icon" class="rank-icon">
                                 <div class="mmr-rank">{{ $user->getRankFromMMR($user->mmr_1v1) }}</div>
+                                @if ($user->getDivisionText($user->mmr_1v1))
+                                    <div class="mmr-division">{{ $user->getDivisionText($user->mmr_1v1) }}</div>
+                                @endif
                                 <div class="mmr-value">{{ $user->mmr_1v1 }} MMR</div>
                             </div>
                         @endif
@@ -228,7 +244,11 @@
                         @if ($user->mmr_2v2)
                             <div class="mmr-card">
                                 <div class="mmr-mode">2v2 Doubles</div>
+                                <img src="{{ $user->getRankImage($user->mmr_2v2) }}" alt="Rank Icon" class="rank-icon">
                                 <div class="mmr-rank">{{ $user->getRankFromMMR($user->mmr_2v2) }}</div>
+                                @if ($user->getDivisionText($user->mmr_2v2))
+                                    <div class="mmr-division">{{ $user->getDivisionText($user->mmr_2v2) }}</div>
+                                @endif
                                 <div class="mmr-value">{{ $user->mmr_2v2 }} MMR</div>
                             </div>
                         @endif
@@ -236,7 +256,11 @@
                         @if ($user->mmr_3v3)
                             <div class="mmr-card">
                                 <div class="mmr-mode">3v3 Standard</div>
+                                <img src="{{ $user->getRankImage($user->mmr_3v3) }}" alt="Rank Icon" class="rank-icon">
                                 <div class="mmr-rank">{{ $user->getRankFromMMR($user->mmr_3v3) }}</div>
+                                @if ($user->getDivisionText($user->mmr_3v3))
+                                    <div class="mmr-division">{{ $user->getDivisionText($user->mmr_3v3) }}</div>
+                                @endif
                                 <div class="mmr-value">{{ $user->mmr_3v3 }} MMR</div>
                             </div>
                         @endif
@@ -244,7 +268,11 @@
                         @if ($user->mmr_hoops)
                             <div class="mmr-card">
                                 <div class="mmr-mode">Hoops</div>
+                                <img src="{{ $user->getRankImage($user->mmr_hoops) }}" alt="Rank Icon" class="rank-icon">
                                 <div class="mmr-rank">{{ $user->getRankFromMMR($user->mmr_hoops) }}</div>
+                                @if ($user->getDivisionText($user->mmr_hoops))
+                                    <div class="mmr-division">{{ $user->getDivisionText($user->mmr_hoops) }}</div>
+                                @endif
                                 <div class="mmr-value">{{ $user->mmr_hoops }} MMR</div>
                             </div>
                         @endif
@@ -252,7 +280,11 @@
                         @if ($user->mmr_rumble)
                             <div class="mmr-card">
                                 <div class="mmr-mode">Rumble</div>
+                                <img src="{{ $user->getRankImage($user->mmr_rumble) }}" alt="Rank Icon" class="rank-icon">
                                 <div class="mmr-rank">{{ $user->getRankFromMMR($user->mmr_rumble) }}</div>
+                                @if ($user->getDivisionText($user->mmr_rumble))
+                                    <div class="mmr-division">{{ $user->getDivisionText($user->mmr_rumble) }}</div>
+                                @endif
                                 <div class="mmr-value">{{ $user->mmr_rumble }} MMR</div>
                             </div>
                         @endif
@@ -260,7 +292,11 @@
                         @if ($user->mmr_dropshot)
                             <div class="mmr-card">
                                 <div class="mmr-mode">Dropshot</div>
+                                <img src="{{ $user->getRankImage($user->mmr_dropshot) }}" alt="Rank Icon" class="rank-icon">
                                 <div class="mmr-rank">{{ $user->getRankFromMMR($user->mmr_dropshot) }}</div>
+                                @if ($user->getDivisionText($user->mmr_dropshot))
+                                    <div class="mmr-division">{{ $user->getDivisionText($user->mmr_dropshot) }}</div>
+                                @endif
                                 <div class="mmr-value">{{ $user->mmr_dropshot }} MMR</div>
                             </div>
                         @endif
@@ -268,8 +304,24 @@
                         @if ($user->mmr_snowday)
                             <div class="mmr-card">
                                 <div class="mmr-mode">Snow Day</div>
+                                <img src="{{ $user->getRankImage($user->mmr_snowday) }}" alt="Rank Icon" class="rank-icon">
                                 <div class="mmr-rank">{{ $user->getRankFromMMR($user->mmr_snowday) }}</div>
+                                @if ($user->getDivisionText($user->mmr_snowday))
+                                    <div class="mmr-division">{{ $user->getDivisionText($user->mmr_snowday) }}</div>
+                                @endif
                                 <div class="mmr-value">{{ $user->mmr_snowday }} MMR</div>
+                            </div>
+                        @endif
+
+                        @if ($user->mmr_tournament)
+                            <div class="mmr-card">
+                                <div class="mmr-mode">Tournament</div>
+                                <img src="{{ $user->getRankImage($user->mmr_tournament) }}" alt="Rank Icon" class="rank-icon">
+                                <div class="mmr-rank">{{ $user->getRankFromMMR($user->mmr_tournament) }}</div>
+                                @if ($user->getDivisionText($user->mmr_tournament))
+                                    <div class="mmr-division">{{ $user->getDivisionText($user->mmr_tournament) }}</div>
+                                @endif
+                                <div class="mmr-value">{{ $user->mmr_tournament }} MMR</div>
                             </div>
                         @endif
                     </div>

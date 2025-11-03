@@ -54,6 +54,7 @@ class ProfileController extends Controller
             'mmr_rumble' => ['nullable', 'integer', 'min:0', 'max:3000'],
             'mmr_dropshot' => ['nullable', 'integer', 'min:0', 'max:3000'],
             'mmr_snowday' => ['nullable', 'integer', 'min:0', 'max:3000'],
+            'mmr_tournament' => ['nullable', 'integer', 'min:0', 'max:3000'],
         ]);
 
         // Handle profile photo upload

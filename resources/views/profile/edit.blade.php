@@ -181,7 +181,7 @@
                 </div>
 
                 <h3 style="color: #4a9eff; margin-top: 2rem; margin-bottom: 1rem; font-size: 1.25rem;">Ranked MMR</h3>
-                <p style="color: #9095a0; margin-bottom: 1.5rem; font-size: 0.95rem;">Vul je MMR in voor elke gamemode (optioneel)</p>
+                <p style="color: #9095a0; margin-bottom: 1.5rem; font-size: 0.95rem;">Vul je MMR in voor elke gamemode (divisie wordt automatisch berekend)</p>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
                     <div class="form-group">
@@ -223,6 +223,12 @@
                     <div class="form-group">
                         <label for="mmr_snowday">Snow Day</label>
                         <input type="number" id="mmr_snowday" name="mmr_snowday" value="{{ old('mmr_snowday', $user->mmr_snowday) }}" min="0" max="3000" placeholder="bijv. 1000">
+                        <small>MMR tussen 0-3000</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mmr_tournament">Tournament</label>
+                        <input type="number" id="mmr_tournament" name="mmr_tournament" value="{{ old('mmr_tournament', $user->mmr_tournament) }}" min="0" max="3000" placeholder="bijv. 1000">
                         <small>MMR tussen 0-3000</small>
                     </div>
                 </div>
