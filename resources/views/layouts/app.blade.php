@@ -163,12 +163,25 @@
                 Rocket League Tracker
             </a>
             <ul class="nav-links">
-                <li><a href="/" class="{{ request()->is('/') ? 'active' : '' }}">Home</a></li>
+                <li><a href="{{ route('home') }}" class="{{ request()->is('/') ? 'active' : '' }}">Home</a></li>
                 <li><a href="{{ route('nieuws.index') }}" class="{{ request()->is('nieuws*') ? 'active' : '' }}">Nieuws</a></li>
-                <li><a href="/spelers">Spelers</a></li>
-                <li><a href="/faq">FAQ</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/login">Login</a></li>
+                <li><a href="{{ route('faq.index') }}" class="{{ request()->is('faq*') ? 'active' : '' }}">FAQ</a></li>
+                <li><a href="{{ route('contact.index') }}" class="{{ request()->is('contact*') ? 'active' : '' }}">Contact</a></li>
+
+                @auth
+                    <li><a href="{{ route('profile.show', auth()->user()) }}" class="{{ request()->is('profile*') ? 'active' : '' }}">Mijn Profiel</a></li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                            @csrf
+                            <button type="submit" style="background: none; border: none; color: #c0c0c0; font-weight: 500; cursor: pointer; padding: 0.5rem 1rem; font-size: inherit; font-family: inherit;">
+                                Uitloggen
+                            </button>
+                        </form>
+                    </li>
+                @else
+                    <li><a href="{{ route('login') }}" class="{{ request()->is('login') ? 'active' : '' }}">Login</a></li>
+                    <li><a href="{{ route('register') }}" class="{{ request()->is('register') ? 'active' : '' }}">Registreer</a></li>
+                @endauth
             </ul>
         </nav>
     </header>

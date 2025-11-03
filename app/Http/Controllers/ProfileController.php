@@ -20,18 +20,25 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the authenticated user's profile
      */
-    public function edit()
+    public function edit(User $user)
     {
-        $user = auth()->user();
+        // Alleen de eigenaar kan zijn/haar eigen profiel bewerken
+        if (auth()->id() !== $user->id) {
+            abort(403, 'Je hebt geen toegang om dit profiel te bewerken.');
+        }
+
         return view('profile.edit', compact('user'));
     }
 
     /**
      * Update the authenticated user's profile
      */
-    public function update(Request $request)
+    public function update(Request $request, User $user)
     {
-        $user = auth()->user();
+        // Alleen de eigenaar kan zijn/haar eigen profiel bijwerken
+        if (auth()->id() !== $user->id) {
+            abort(403, 'Je hebt geen toegang om dit profiel te bewerken.');
+        }
 
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
