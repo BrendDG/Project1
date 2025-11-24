@@ -390,6 +390,20 @@
                     <span>FAQ</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.contact.messages') }}" class="{{ request()->routeIs('admin.contact*') ? 'active' : '' }}">
+                    <span class="icon">📧</span>
+                    <span>Contact Berichten</span>
+                    @php
+                        $unreadCount = \App\Models\ContactMessage::where('is_read', false)->count();
+                    @endphp
+                    @if($unreadCount > 0)
+                        <span style="background: #ef4444; color: #fff; padding: 0.15rem 0.5rem; border-radius: 10px; font-size: 0.75rem; margin-left: 0.5rem; font-weight: bold;">
+                            {{ $unreadCount }}
+                        </span>
+                    @endif
+                </a>
+            </li>
 
             <div class="sidebar-divider"></div>
 

@@ -83,4 +83,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/faq/items/{item}/edit', [\App\Http\Controllers\Admin\AdminController::class, 'editFaqItem'])->name('faq.items.edit');
     Route::put('/faq/items/{item}', [\App\Http\Controllers\Admin\AdminController::class, 'updateFaqItem'])->name('faq.items.update');
     Route::delete('/faq/items/{item}', [\App\Http\Controllers\Admin\AdminController::class, 'destroyFaqItem'])->name('faq.items.destroy');
+
+    // Contact berichten
+    Route::get('/contact', [\App\Http\Controllers\Admin\AdminController::class, 'contactMessages'])->name('contact.messages');
+    Route::get('/contact/{message}', [\App\Http\Controllers\Admin\AdminController::class, 'showContactMessage'])->name('contact.show');
+    Route::post('/contact/{message}/toggle-read', [\App\Http\Controllers\Admin\AdminController::class, 'toggleReadStatus'])->name('contact.toggle-read');
+    Route::delete('/contact/{message}', [\App\Http\Controllers\Admin\AdminController::class, 'destroyContactMessage'])->name('contact.destroy');
+    Route::post('/contact/mark-all-read', [\App\Http\Controllers\Admin\AdminController::class, 'markAllAsRead'])->name('contact.mark-all-read');
 });

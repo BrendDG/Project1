@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Nieuws;
 use App\Models\FaqCategory;
 use App\Models\FaqItem;
+use App\Models\ContactMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -33,6 +34,10 @@ class AdminController extends Controller
         $totalFaqCategories = FaqCategory::count();
         $totalFaqItems = FaqItem::count();
 
+        // Contact berichten statistieken
+        $totalContactMessages = ContactMessage::count();
+        $unreadContactMessages = ContactMessage::where('is_read', false)->count();
+
         return view('admin.dashboard', compact(
             'totalUsers',
             'totalAdmins',
@@ -42,7 +47,9 @@ class AdminController extends Controller
             'scheduledNieuws',
             'recentNieuws',
             'totalFaqCategories',
-            'totalFaqItems'
+            'totalFaqItems',
+            'totalContactMessages',
+            'unreadContactMessages'
         ));
     }
 
@@ -464,5 +471,83 @@ class AdminController extends Controller
         $item->delete();
 
         return redirect()->route('admin.faq.items')->with('success', 'FAQ item succesvol verwijderd!');
+    }
+
+    // ==================== CONTACT BERICHTEN ====================
+
+    /**
+     * Toon alle contactberichten
+     */
+    public function contactMessages(Request $request)
+    {
+        $query = ContactMessage::query();
+
+        // Filter op gelezen/ongelezen
+        if ($request->has('status_filter')) {
+            if ($request->status_filter === 'unread') {
+                $query->where('is_read', false);
+            } elseif ($request->status_filter === 'read') {
+                $query->where('is_read', true);
+            }
+        }
+
+        // Zoekfunctionaliteit
+        if ($request->has('search') && $request->search) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%")
+                  ->orWhere('subject', 'like', "%{$search}%")
+                  ->orWhere('message', 'like', "%{$search}%");
+            });
+        }
+
+        $messages = $query->latest()->paginate(15);
+        $unreadCount = ContactMessage::where('is_read', false)->count();
+
+        return view('admin.contact.index', compact('messages', 'unreadCount'));
+    }
+
+    /**
+     * Toon een specifiek contactbericht
+     */
+    public function showContactMessage(ContactMessage $message)
+    {
+        // Markeer als gelezen
+        if (!$message->is_read) {
+            $message->update(['is_read' => true]);
+        }
+
+        return view('admin.contact.show', compact('message'));
+    }
+
+    /**
+     * Markeer bericht als gelezen/ongelezen
+     */
+    public function toggleReadStatus(ContactMessage $message)
+    {
+        $message->is_read = !$message->is_read;
+        $message->save();
+
+        $status = $message->is_read ? 'gelezen' : 'ongelezen';
+        return back()->with('success', "Bericht gemarkeerd als {$status}.");
+    }
+
+    /**
+     * Verwijder contactbericht
+     */
+    public function destroyContactMessage(ContactMessage $message)
+    {
+        $message->delete();
+        return redirect()->route('admin.contact.messages')->with('success', 'Contactbericht succesvol verwijderd!');
+    }
+
+    /**
+     * Markeer alle berichten als gelezen
+     */
+    public function markAllAsRead()
+    {
+        ContactMessage::where('is_read', false)->update(['is_read' => true]);
+        return back()->with('success', 'Alle berichten zijn gemarkeerd als gelezen.');
     }
 }

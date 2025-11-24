@@ -47,6 +47,17 @@
         <h3 style="color: #ec4899; font-size: 2.5rem; margin-bottom: 0.5rem;">{{ $totalFaqItems }}</h3>
         <p style="color: #9095a0;">FAQ Items</p>
     </div>
+
+    <!-- Stats Cards - Contact -->
+    <div class="card" style="text-align: center;">
+        <h3 style="color: #3b82f6; font-size: 2.5rem; margin-bottom: 0.5rem;">{{ $totalContactMessages }}</h3>
+        <p style="color: #9095a0;">Totaal Berichten</p>
+    </div>
+
+    <div class="card" style="text-align: center;">
+        <h3 style="color: {{ $unreadContactMessages > 0 ? '#ef4444' : '#10b981' }}; font-size: 2.5rem; margin-bottom: 0.5rem;">{{ $unreadContactMessages }}</h3>
+        <p style="color: #9095a0;">Ongelezen</p>
+    </div>
 </div>
 
 <!-- Recent Users -->
@@ -167,6 +178,14 @@
         </a>
         <a href="{{ route('admin.faq.items') }}" class="btn btn-primary">
             ❓ FAQ Items
+        </a>
+        <a href="{{ route('admin.contact.messages') }}" class="btn btn-primary">
+            📧 Contact Berichten
+            @if($unreadContactMessages > 0)
+                <span style="background: #ef4444; color: #fff; padding: 0.15rem 0.5rem; border-radius: 10px; font-size: 0.75rem; margin-left: 0.25rem;">
+                    {{ $unreadContactMessages }}
+                </span>
+            @endif
         </a>
         <a href="{{ route('home') }}" class="btn btn-secondary">
             🏠 Terug naar Site
