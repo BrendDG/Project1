@@ -165,8 +165,8 @@
         <a href="{{ route('admin.nieuws') }}" class="btn btn-primary">
             📰 Alle Nieuwsitems
         </a>
-        <a href="{{ route('admin.faq.categories') }}" class="btn btn-primary">
-            ❓ FAQ Beheer
+        <a href="{{ route('admin.faq.items') }}" class="btn btn-primary">
+            ❓ FAQ Items
         </a>
         <a href="{{ route('home') }}" class="btn btn-secondary">
             🏠 Terug naar Site
