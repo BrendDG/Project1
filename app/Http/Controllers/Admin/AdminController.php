@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Nieuws;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\Password;
 
 class AdminController extends Controller
@@ -168,5 +170,116 @@ class AdminController extends Controller
             : "Admin rechten van {$user->name} zijn ingetrokken.";
 
         return back()->with('success', $message);
+    }
+
+    // ==================== NIEUWS BEHEER ====================
+
+    /**
+     * Toon alle nieuwsitems
+     */
+    public function nieuws(Request $request)
+    {
+        $query = Nieuws::query();
+
+        // Zoekfunctionaliteit
+        if ($request->has('search') && $request->search) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('content', 'like', "%{$search}%");
+            });
+        }
+
+        // Filter op publicatie status
+        if ($request->has('status_filter')) {
+            if ($request->status_filter === 'published') {
+                $query->where('published_at', '<=', now());
+            } elseif ($request->status_filter === 'scheduled') {
+                $query->where('published_at', '>', now());
+            }
+        }
+
+        $nieuwsItems = $query->latest('created_at')->paginate(15);
+
+        return view('admin.nieuws.index', compact('nieuwsItems'));
+    }
+
+    /**
+     * Toon formulier voor nieuw nieuwsitem
+     */
+    public function createNieuws()
+    {
+        return view('admin.nieuws.create');
+    }
+
+    /**
+     * Sla nieuw nieuwsitem op
+     */
+    public function storeNieuws(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'content' => ['required', 'string'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,jpg,png,gif', 'max:2048'],
+            'published_at' => ['required', 'date'],
+        ]);
+
+        // Upload afbeelding
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('nieuws', 'public');
+        }
+
+        Nieuws::create($validated);
+
+        return redirect()->route('admin.nieuws')->with('success', 'Nieuwsitem succesvol aangemaakt!');
+    }
+
+    /**
+     * Toon formulier voor nieuwsitem bewerken
+     */
+    public function editNieuws(Nieuws $nieuws)
+    {
+        return view('admin.nieuws.edit', compact('nieuws'));
+    }
+
+    /**
+     * Update nieuwsitem
+     */
+    public function updateNieuws(Request $request, Nieuws $nieuws)
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'content' => ['required', 'string'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,jpg,png,gif', 'max:2048'],
+            'published_at' => ['required', 'date'],
+        ]);
+
+        // Upload nieuwe afbeelding
+        if ($request->hasFile('image')) {
+            // Verwijder oude afbeelding
+            if ($nieuws->image) {
+                Storage::disk('public')->delete($nieuws->image);
+            }
+            $validated['image'] = $request->file('image')->store('nieuws', 'public');
+        }
+
+        $nieuws->update($validated);
+
+        return redirect()->route('admin.nieuws')->with('success', 'Nieuwsitem succesvol bijgewerkt!');
+    }
+
+    /**
+     * Verwijder nieuwsitem
+     */
+    public function destroyNieuws(Nieuws $nieuws)
+    {
+        // Verwijder afbeelding
+        if ($nieuws->image) {
+            Storage::disk('public')->delete($nieuws->image);
+        }
+
+        $nieuws->delete();
+
+        return redirect()->route('admin.nieuws')->with('success', 'Nieuwsitem succesvol verwijderd!');
     }
 }

@@ -48,7 +48,10 @@ Route::middleware('auth')->group(function () {
 
 // Admin routes (alleen voor admins)
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    // Dashboard
     Route::get('/dashboard', [\App\Http\Controllers\Admin\AdminController::class, 'dashboard'])->name('dashboard');
+
+    // Gebruikers beheer
     Route::get('/users', [\App\Http\Controllers\Admin\AdminController::class, 'users'])->name('users');
     Route::get('/users/create', [\App\Http\Controllers\Admin\AdminController::class, 'createUser'])->name('users.create');
     Route::post('/users', [\App\Http\Controllers\Admin\AdminController::class, 'storeUser'])->name('users.store');
@@ -56,4 +59,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::put('/users/{user}', [\App\Http\Controllers\Admin\AdminController::class, 'updateUser'])->name('users.update');
     Route::delete('/users/{user}', [\App\Http\Controllers\Admin\AdminController::class, 'destroyUser'])->name('users.destroy');
     Route::post('/users/{user}/toggle-admin', [\App\Http\Controllers\Admin\AdminController::class, 'toggleAdmin'])->name('users.toggle-admin');
+
+    // Nieuws beheer
+    Route::get('/nieuws', [\App\Http\Controllers\Admin\AdminController::class, 'nieuws'])->name('nieuws');
+    Route::get('/nieuws/create', [\App\Http\Controllers\Admin\AdminController::class, 'createNieuws'])->name('nieuws.create');
+    Route::post('/nieuws', [\App\Http\Controllers\Admin\AdminController::class, 'storeNieuws'])->name('nieuws.store');
+    Route::get('/nieuws/{nieuws}/edit', [\App\Http\Controllers\Admin\AdminController::class, 'editNieuws'])->name('nieuws.edit');
+    Route::put('/nieuws/{nieuws}', [\App\Http\Controllers\Admin\AdminController::class, 'updateNieuws'])->name('nieuws.update');
+    Route::delete('/nieuws/{nieuws}', [\App\Http\Controllers\Admin\AdminController::class, 'destroyNieuws'])->name('nieuws.destroy');
 });
