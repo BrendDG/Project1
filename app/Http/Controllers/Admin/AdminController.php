@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Nieuws;
+use App\Models\FaqCategory;
+use App\Models\FaqItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -295,5 +297,166 @@ class AdminController extends Controller
         $nieuws->delete();
 
         return redirect()->route('admin.nieuws')->with('success', 'Nieuwsitem succesvol verwijderd!');
+    }
+
+    // ==================== FAQ BEHEER ====================
+
+    /**
+     * Toon alle FAQ categorieën
+     */
+    public function faqCategories()
+    {
+        $categories = FaqCategory::withCount('faqItems')->orderBy('order')->get();
+        return view('admin.faq.categories.index', compact('categories'));
+    }
+
+    /**
+     * Toon formulier voor nieuwe FAQ categorie
+     */
+    public function createFaqCategory()
+    {
+        return view('admin.faq.categories.create');
+    }
+
+    /**
+     * Sla nieuwe FAQ categorie op
+     */
+    public function storeFaqCategory(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'order' => ['required', 'integer', 'min:0'],
+        ]);
+
+        FaqCategory::create($validated);
+
+        return redirect()->route('admin.faq.categories')->with('success', 'FAQ categorie succesvol aangemaakt!');
+    }
+
+    /**
+     * Toon formulier voor FAQ categorie bewerken
+     */
+    public function editFaqCategory(FaqCategory $category)
+    {
+        return view('admin.faq.categories.edit', compact('category'));
+    }
+
+    /**
+     * Update FAQ categorie
+     */
+    public function updateFaqCategory(Request $request, FaqCategory $category)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'order' => ['required', 'integer', 'min:0'],
+        ]);
+
+        $category->update($validated);
+
+        return redirect()->route('admin.faq.categories')->with('success', 'FAQ categorie succesvol bijgewerkt!');
+    }
+
+    /**
+     * Verwijder FAQ categorie
+     */
+    public function destroyFaqCategory(FaqCategory $category)
+    {
+        // Check of er nog FAQ items zijn in deze categorie
+        if ($category->faqItems()->count() > 0) {
+            return back()->with('error', 'Je kunt deze categorie niet verwijderen omdat er nog FAQ items in zitten. Verwijder eerst alle items.');
+        }
+
+        $category->delete();
+
+        return redirect()->route('admin.faq.categories')->with('success', 'FAQ categorie succesvol verwijderd!');
+    }
+
+    /**
+     * Toon alle FAQ items
+     */
+    public function faqItems(Request $request)
+    {
+        $query = FaqItem::with('category');
+
+        // Zoekfunctionaliteit
+        if ($request->has('search') && $request->search) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('question', 'like', "%{$search}%")
+                  ->orWhere('answer', 'like', "%{$search}%");
+            });
+        }
+
+        // Filter op categorie
+        if ($request->has('category_filter') && $request->category_filter) {
+            $query->where('faq_category_id', $request->category_filter);
+        }
+
+        $items = $query->orderBy('order')->paginate(15);
+        $categories = FaqCategory::orderBy('order')->get();
+
+        return view('admin.faq.items.index', compact('items', 'categories'));
+    }
+
+    /**
+     * Toon formulier voor nieuw FAQ item
+     */
+    public function createFaqItem()
+    {
+        $categories = FaqCategory::orderBy('order')->get();
+        return view('admin.faq.items.create', compact('categories'));
+    }
+
+    /**
+     * Sla nieuw FAQ item op
+     */
+    public function storeFaqItem(Request $request)
+    {
+        $validated = $request->validate([
+            'faq_category_id' => ['required', 'exists:faq_categories,id'],
+            'question' => ['required', 'string', 'max:500'],
+            'answer' => ['required', 'string'],
+            'order' => ['required', 'integer', 'min:0'],
+        ]);
+
+        FaqItem::create($validated);
+
+        return redirect()->route('admin.faq.items')->with('success', 'FAQ item succesvol aangemaakt!');
+    }
+
+    /**
+     * Toon formulier voor FAQ item bewerken
+     */
+    public function editFaqItem(FaqItem $item)
+    {
+        $categories = FaqCategory::orderBy('order')->get();
+        return view('admin.faq.items.edit', compact('item', 'categories'));
+    }
+
+    /**
+     * Update FAQ item
+     */
+    public function updateFaqItem(Request $request, FaqItem $item)
+    {
+        $validated = $request->validate([
+            'faq_category_id' => ['required', 'exists:faq_categories,id'],
+            'question' => ['required', 'string', 'max:500'],
+            'answer' => ['required', 'string'],
+            'order' => ['required', 'integer', 'min:0'],
+        ]);
+
+        $item->update($validated);
+
+        return redirect()->route('admin.faq.items')->with('success', 'FAQ item succesvol bijgewerkt!');
+    }
+
+    /**
+     * Verwijder FAQ item
+     */
+    public function destroyFaqItem(FaqItem $item)
+    {
+        $item->delete();
+
+        return redirect()->route('admin.faq.items')->with('success', 'FAQ item succesvol verwijderd!');
     }
 }
