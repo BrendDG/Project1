@@ -378,6 +378,12 @@
                     <span>Gebruikers</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.nieuws') }}" class="{{ request()->routeIs('admin.nieuws*') ? 'active' : '' }}">
+                    <span class="icon">📰</span>
+                    <span>Nieuws</span>
+                </a>
+            </li>
 
             <div class="sidebar-divider"></div>
 

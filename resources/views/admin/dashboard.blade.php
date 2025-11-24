@@ -4,8 +4,8 @@
 @section('page-title', 'Dashboard')
 
 @section('content')
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-    <!-- Stats Cards -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+    <!-- Stats Cards - Gebruikers -->
     <div class="card" style="text-align: center;">
         <h3 style="color: #4a9eff; font-size: 2.5rem; margin-bottom: 0.5rem;">{{ $totalUsers }}</h3>
         <p style="color: #9095a0;">Totaal Gebruikers</p>
@@ -19,6 +19,22 @@
     <div class="card" style="text-align: center;">
         <h3 style="color: #10b981; font-size: 2.5rem; margin-bottom: 0.5rem;">{{ $totalUsers - $totalAdmins }}</h3>
         <p style="color: #9095a0;">Normale Gebruikers</p>
+    </div>
+
+    <!-- Stats Cards - Nieuws -->
+    <div class="card" style="text-align: center;">
+        <h3 style="color: #6366f1; font-size: 2.5rem; margin-bottom: 0.5rem;">{{ $totalNieuws }}</h3>
+        <p style="color: #9095a0;">Totaal Nieuwsitems</p>
+    </div>
+
+    <div class="card" style="text-align: center;">
+        <h3 style="color: #10b981; font-size: 2.5rem; margin-bottom: 0.5rem;">{{ $publishedNieuws }}</h3>
+        <p style="color: #9095a0;">Gepubliceerd</p>
+    </div>
+
+    <div class="card" style="text-align: center;">
+        <h3 style="color: #f59e0b; font-size: 2.5rem; margin-bottom: 0.5rem;">{{ $scheduledNieuws }}</h3>
+        <p style="color: #9095a0;">Gepland</p>
     </div>
 </div>
 
@@ -70,6 +86,52 @@
     </div>
 </div>
 
+<!-- Recent Nieuws -->
+<div class="card">
+    <div class="card-header">
+        <h3>Recente Nieuwsitems</h3>
+    </div>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Titel</th>
+                    <th>Status</th>
+                    <th>Publicatiedatum</th>
+                    <th>Acties</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($recentNieuws as $item)
+                    <tr>
+                        <td>{{ Str::limit($item->title, 60) }}</td>
+                        <td>
+                            @if($item->published_at <= now())
+                                <span class="badge" style="background: #10b981; color: #fff;">Gepubliceerd</span>
+                            @else
+                                <span class="badge" style="background: #f59e0b; color: #000;">Gepland</span>
+                            @endif
+                        </td>
+                        <td>{{ $item->published_at->format('d-m-Y H:i') }}</td>
+                        <td>
+                            <a href="{{ route('admin.nieuws.edit', $item) }}" class="btn btn-primary btn-sm">Bewerken</a>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: #9095a0;">Geen nieuwsitems gevonden</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    <div style="margin-top: 1.5rem; text-align: center;">
+        <a href="{{ route('admin.nieuws') }}" class="btn btn-primary">Bekijk Alle Nieuwsitems</a>
+    </div>
+</div>
+
 <!-- Quick Actions -->
 <div class="card">
     <div class="card-header">
@@ -80,8 +142,14 @@
         <a href="{{ route('admin.users.create') }}" class="btn btn-success">
             ➕ Nieuwe Gebruiker
         </a>
+        <a href="{{ route('admin.nieuws.create') }}" class="btn btn-success">
+            📰 Nieuw Nieuwsitem
+        </a>
         <a href="{{ route('admin.users') }}" class="btn btn-primary">
             👥 Alle Gebruikers
+        </a>
+        <a href="{{ route('admin.nieuws') }}" class="btn btn-primary">
+            📰 Alle Nieuwsitems
         </a>
         <a href="{{ route('home') }}" class="btn btn-secondary">
             🏠 Terug naar Site

@@ -21,7 +21,21 @@ class AdminController extends Controller
         $totalAdmins = User::where('is_admin', true)->count();
         $recentUsers = User::latest()->take(5)->get();
 
-        return view('admin.dashboard', compact('totalUsers', 'totalAdmins', 'recentUsers'));
+        // Nieuws statistieken
+        $totalNieuws = Nieuws::count();
+        $publishedNieuws = Nieuws::where('published_at', '<=', now())->count();
+        $scheduledNieuws = Nieuws::where('published_at', '>', now())->count();
+        $recentNieuws = Nieuws::latest()->take(5)->get();
+
+        return view('admin.dashboard', compact(
+            'totalUsers',
+            'totalAdmins',
+            'recentUsers',
+            'totalNieuws',
+            'publishedNieuws',
+            'scheduledNieuws',
+            'recentNieuws'
+        ));
     }
 
     /**
