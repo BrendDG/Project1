@@ -170,6 +170,9 @@
 
                 @auth
                     <li><a href="{{ route('profile.show', auth()->user()) }}" class="{{ request()->is('profile*') ? 'active' : '' }}">Mijn Profiel</a></li>
+                    @if(auth()->user()->isAdmin())
+                        <li><a href="{{ route('admin.dashboard') }}" class="{{ request()->is('admin*') ? 'active' : '' }}" style="color: #f59e0b;">Admin Panel</a></li>
+                    @endif
                     <li>
                         <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                             @csrf
