@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContactMessage;
+use App\Models\User;
+use App\Mail\ContactFormMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
@@ -40,25 +42,27 @@ class ContactController extends Controller
         // XSS Protection via mass assignment (fillable in model)
         $contactMessage = ContactMessage::create($validated);
 
-        // Probeer email te versturen naar admin
+        // Probeer email te versturen naar alle admins
         try {
-            // Check of MAIL_FROM_ADDRESS is ingesteld in .env
-            $adminEmail = config('mail.from.address', 'admin@example.com');
+            // Haal alle admin email adressen op
+            $adminEmails = User::where('is_admin', true)
+                ->pluck('email')
+                ->toArray();
 
-            Mail::raw(
-                "Nieuw contactbericht ontvangen:\n\n" .
-                "Naam: {$validated['name']}\n" .
-                "Email: {$validated['email']}\n" .
-                "Onderwerp: {$validated['subject']}\n\n" .
-                "Bericht:\n{$validated['message']}\n\n" .
-                "---\n" .
-                "Dit bericht werd verstuurd via het contactformulier op " . config('app.url'),
-                function ($message) use ($validated, $adminEmail) {
-                    $message->to($adminEmail)
-                        ->subject('Nieuw contactbericht: ' . $validated['subject'])
-                        ->from($validated['email'], $validated['name']);
-                }
-            );
+            // Als er geen admins zijn, gebruik fallback email
+            if (empty($adminEmails)) {
+                $adminEmails = [config('mail.from.address', 'admin@example.com')];
+            }
+
+            // Verstuur email naar alle admins
+            foreach ($adminEmails as $adminEmail) {
+                Mail::to($adminEmail)->send(new ContactFormMail($contactMessage));
+            }
+
+            Log::info('Contact form email sent to admins', [
+                'contact_message_id' => $contactMessage->id,
+                'admin_count' => count($adminEmails)
+            ]);
         } catch (\Exception $e) {
             // Log de error maar toon geen error aan gebruiker
             Log::error('Failed to send contact email: ' . $e->getMessage());
