@@ -384,6 +384,12 @@
                     <span>Nieuws</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.faq.categories') }}" class="{{ request()->routeIs('admin.faq*') ? 'active' : '' }}">
+                    <span class="icon">❓</span>
+                    <span>FAQ</span>
+                </a>
+            </li>
 
             <div class="sidebar-divider"></div>
 

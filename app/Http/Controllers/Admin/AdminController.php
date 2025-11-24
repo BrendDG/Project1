@@ -29,6 +29,10 @@ class AdminController extends Controller
         $scheduledNieuws = Nieuws::where('published_at', '>', now())->count();
         $recentNieuws = Nieuws::latest()->take(5)->get();
 
+        // FAQ statistieken
+        $totalFaqCategories = FaqCategory::count();
+        $totalFaqItems = FaqItem::count();
+
         return view('admin.dashboard', compact(
             'totalUsers',
             'totalAdmins',
@@ -36,7 +40,9 @@ class AdminController extends Controller
             'totalNieuws',
             'publishedNieuws',
             'scheduledNieuws',
-            'recentNieuws'
+            'recentNieuws',
+            'totalFaqCategories',
+            'totalFaqItems'
         ));
     }
 

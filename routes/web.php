@@ -67,4 +67,20 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/nieuws/{nieuws}/edit', [\App\Http\Controllers\Admin\AdminController::class, 'editNieuws'])->name('nieuws.edit');
     Route::put('/nieuws/{nieuws}', [\App\Http\Controllers\Admin\AdminController::class, 'updateNieuws'])->name('nieuws.update');
     Route::delete('/nieuws/{nieuws}', [\App\Http\Controllers\Admin\AdminController::class, 'destroyNieuws'])->name('nieuws.destroy');
+
+    // FAQ Categorieën beheer
+    Route::get('/faq/categories', [\App\Http\Controllers\Admin\AdminController::class, 'faqCategories'])->name('faq.categories');
+    Route::get('/faq/categories/create', [\App\Http\Controllers\Admin\AdminController::class, 'createFaqCategory'])->name('faq.categories.create');
+    Route::post('/faq/categories', [\App\Http\Controllers\Admin\AdminController::class, 'storeFaqCategory'])->name('faq.categories.store');
+    Route::get('/faq/categories/{category}/edit', [\App\Http\Controllers\Admin\AdminController::class, 'editFaqCategory'])->name('faq.categories.edit');
+    Route::put('/faq/categories/{category}', [\App\Http\Controllers\Admin\AdminController::class, 'updateFaqCategory'])->name('faq.categories.update');
+    Route::delete('/faq/categories/{category}', [\App\Http\Controllers\Admin\AdminController::class, 'destroyFaqCategory'])->name('faq.categories.destroy');
+
+    // FAQ Items beheer
+    Route::get('/faq/items', [\App\Http\Controllers\Admin\AdminController::class, 'faqItems'])->name('faq.items');
+    Route::get('/faq/items/create', [\App\Http\Controllers\Admin\AdminController::class, 'createFaqItem'])->name('faq.items.create');
+    Route::post('/faq/items', [\App\Http\Controllers\Admin\AdminController::class, 'storeFaqItem'])->name('faq.items.store');
+    Route::get('/faq/items/{item}/edit', [\App\Http\Controllers\Admin\AdminController::class, 'editFaqItem'])->name('faq.items.edit');
+    Route::put('/faq/items/{item}', [\App\Http\Controllers\Admin\AdminController::class, 'updateFaqItem'])->name('faq.items.update');
+    Route::delete('/faq/items/{item}', [\App\Http\Controllers\Admin\AdminController::class, 'destroyFaqItem'])->name('faq.items.destroy');
 });
