@@ -45,3 +45,49 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/{user}/edit', [ProfileController::class, 'edit'])->name('profile.edit'); // Edit own profile
     Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update'); // Update own profile
 });
+
+// Admin routes (alleen voor admins)
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    // Dashboard
+    Route::get('/dashboard', [\App\Http\Controllers\Admin\AdminController::class, 'dashboard'])->name('dashboard');
+
+    // Gebruikers beheer
+    Route::get('/users', [\App\Http\Controllers\Admin\AdminController::class, 'users'])->name('users');
+    Route::get('/users/create', [\App\Http\Controllers\Admin\AdminController::class, 'createUser'])->name('users.create');
+    Route::post('/users', [\App\Http\Controllers\Admin\AdminController::class, 'storeUser'])->name('users.store');
+    Route::get('/users/{user}/edit', [\App\Http\Controllers\Admin\AdminController::class, 'editUser'])->name('users.edit');
+    Route::put('/users/{user}', [\App\Http\Controllers\Admin\AdminController::class, 'updateUser'])->name('users.update');
+    Route::delete('/users/{user}', [\App\Http\Controllers\Admin\AdminController::class, 'destroyUser'])->name('users.destroy');
+    Route::post('/users/{user}/toggle-admin', [\App\Http\Controllers\Admin\AdminController::class, 'toggleAdmin'])->name('users.toggle-admin');
+
+    // Nieuws beheer
+    Route::get('/nieuws', [\App\Http\Controllers\Admin\AdminController::class, 'nieuws'])->name('nieuws');
+    Route::get('/nieuws/create', [\App\Http\Controllers\Admin\AdminController::class, 'createNieuws'])->name('nieuws.create');
+    Route::post('/nieuws', [\App\Http\Controllers\Admin\AdminController::class, 'storeNieuws'])->name('nieuws.store');
+    Route::get('/nieuws/{nieuws}/edit', [\App\Http\Controllers\Admin\AdminController::class, 'editNieuws'])->name('nieuws.edit');
+    Route::put('/nieuws/{nieuws}', [\App\Http\Controllers\Admin\AdminController::class, 'updateNieuws'])->name('nieuws.update');
+    Route::delete('/nieuws/{nieuws}', [\App\Http\Controllers\Admin\AdminController::class, 'destroyNieuws'])->name('nieuws.destroy');
+
+    // FAQ Categorieën beheer
+    Route::get('/faq/categories', [\App\Http\Controllers\Admin\AdminController::class, 'faqCategories'])->name('faq.categories');
+    Route::get('/faq/categories/create', [\App\Http\Controllers\Admin\AdminController::class, 'createFaqCategory'])->name('faq.categories.create');
+    Route::post('/faq/categories', [\App\Http\Controllers\Admin\AdminController::class, 'storeFaqCategory'])->name('faq.categories.store');
+    Route::get('/faq/categories/{category}/edit', [\App\Http\Controllers\Admin\AdminController::class, 'editFaqCategory'])->name('faq.categories.edit');
+    Route::put('/faq/categories/{category}', [\App\Http\Controllers\Admin\AdminController::class, 'updateFaqCategory'])->name('faq.categories.update');
+    Route::delete('/faq/categories/{category}', [\App\Http\Controllers\Admin\AdminController::class, 'destroyFaqCategory'])->name('faq.categories.destroy');
+
+    // FAQ Items beheer
+    Route::get('/faq/items', [\App\Http\Controllers\Admin\AdminController::class, 'faqItems'])->name('faq.items');
+    Route::get('/faq/items/create', [\App\Http\Controllers\Admin\AdminController::class, 'createFaqItem'])->name('faq.items.create');
+    Route::post('/faq/items', [\App\Http\Controllers\Admin\AdminController::class, 'storeFaqItem'])->name('faq.items.store');
+    Route::get('/faq/items/{item}/edit', [\App\Http\Controllers\Admin\AdminController::class, 'editFaqItem'])->name('faq.items.edit');
+    Route::put('/faq/items/{item}', [\App\Http\Controllers\Admin\AdminController::class, 'updateFaqItem'])->name('faq.items.update');
+    Route::delete('/faq/items/{item}', [\App\Http\Controllers\Admin\AdminController::class, 'destroyFaqItem'])->name('faq.items.destroy');
+
+    // Contact berichten
+    Route::get('/contact', [\App\Http\Controllers\Admin\AdminController::class, 'contactMessages'])->name('contact.messages');
+    Route::get('/contact/{message}', [\App\Http\Controllers\Admin\AdminController::class, 'showContactMessage'])->name('contact.show');
+    Route::post('/contact/{message}/toggle-read', [\App\Http\Controllers\Admin\AdminController::class, 'toggleReadStatus'])->name('contact.toggle-read');
+    Route::delete('/contact/{message}', [\App\Http\Controllers\Admin\AdminController::class, 'destroyContactMessage'])->name('contact.destroy');
+    Route::post('/contact/mark-all-read', [\App\Http\Controllers\Admin\AdminController::class, 'markAllAsRead'])->name('contact.mark-all-read');
+});
