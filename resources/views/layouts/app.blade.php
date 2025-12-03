@@ -183,7 +183,6 @@
                     </li>
                 @else
                     <li><a href="{{ route('login') }}" class="{{ request()->is('login') ? 'active' : '' }}">Login</a></li>
-                    <li><a href="{{ route('register') }}" class="{{ request()->is('register') ? 'active' : '' }}">Registreer</a></li>
                 @endauth
             </ul>
         </nav>
