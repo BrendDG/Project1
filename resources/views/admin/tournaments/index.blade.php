@@ -227,7 +227,6 @@
                     <th>Tijd</th>
                     <th>Game Mode</th>
                     <th>Deelnemers</th>
-                    <th>Status</th>
                     <th>Acties</th>
                 </tr>
             </thead>
@@ -240,12 +239,7 @@
                         <td>{{ $tournament->tournament_date->format('d M Y') }}</td>
                         <td>{{ \Carbon\Carbon::parse($tournament->start_time)->format('H:i') }}</td>
                         <td>{{ strtoupper($tournament->game_mode) }}</td>
-                        <td>{{ $tournament->participants->count() }}/{{ $tournament->max_participants }}</td>
-                        <td>
-                            <span class="status-badge {{ $tournament->getStatusBadgeClass() }}">
-                                {{ $tournament->getStatusLabel() }}
-                            </span>
-                        </td>
+                        <td>{{ $tournament->participants->count() }}</td>
                         <td>
                             <div class="actions">
                                 <a href="{{ route('tournaments.show', $tournament) }}" class="btn btn-secondary btn-sm" target="_blank">Bekijk</a>
@@ -261,7 +255,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" style="text-align: center; padding: 40px; color: #9095a0;">
+                        <td colspan="6" style="text-align: center; padding: 40px; color: #9095a0;">
                             Geen toernooien gevonden.
                         </td>
                     </tr>

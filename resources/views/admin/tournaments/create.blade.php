@@ -197,25 +197,6 @@
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="max_participants">Max Deelnemers *</label>
-                    <input type="number" id="max_participants" name="max_participants" value="{{ old('max_participants', 32) }}" min="4" max="128" required>
-                    <small>Tussen 4 en 128 deelnemers</small>
-                    @error('max_participants')
-                        <div class="error-message">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                    <label for="prize_pool">Prijzenpot</label>
-                    <input type="text" id="prize_pool" name="prize_pool" value="{{ old('prize_pool') }}" placeholder="bijv. €100">
-                    @error('prize_pool')
-                        <div class="error-message">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-
             <div class="form-group">
                 <label for="image">Toernooi Afbeelding</label>
                 <input type="file" id="image" name="image" accept="image/*">
@@ -255,14 +236,6 @@
         if (endTime <= startTime) {
             e.preventDefault();
             alert('De eindtijd moet na de starttijd zijn.');
-            return false;
-        }
-
-        // Validate max participants
-        const maxParticipants = parseInt(document.getElementById('max_participants').value);
-        if (maxParticipants < 4 || maxParticipants > 128) {
-            e.preventDefault();
-            alert('Het maximum aantal deelnemers moet tussen 4 en 128 zijn.');
             return false;
         }
     });

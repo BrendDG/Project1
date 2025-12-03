@@ -41,14 +41,14 @@ class TournamentController extends Controller
             'tournament_date' => 'required|date|after_or_equal:today',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
-            'max_participants' => 'required|integer|min:4|max:128',
             'game_mode' => 'required|in:1v1,2v2,3v3,hoops,rumble,dropshot,snowday',
-            'prize_pool' => 'nullable|string|max:100',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $validated['created_by'] = Auth::id();
         $validated['status'] = 'upcoming';
+        $validated['max_participants'] = 999; // Default unlimited participants
+        $validated['prize_pool'] = null; // No prize pool display
 
         // Handle image upload
         if ($request->hasFile('image')) {
@@ -82,9 +82,7 @@ class TournamentController extends Controller
             'tournament_date' => 'required|date',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
-            'max_participants' => 'required|integer|min:4|max:128',
             'game_mode' => 'required|in:1v1,2v2,3v3,hoops,rumble,dropshot,snowday',
-            'prize_pool' => 'nullable|string|max:100',
             'status' => 'required|in:upcoming,ongoing,completed,cancelled',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);

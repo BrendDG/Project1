@@ -210,14 +210,6 @@
             <div class="stat-label">Geregistreerd</div>
         </div>
         <div class="stat-card">
-            <div class="stat-value">{{ $tournament->max_participants }}</div>
-            <div class="stat-label">Max Deelnemers</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">{{ $tournament->getAvailableSpots() }}</div>
-            <div class="stat-label">Plekken Over</div>
-        </div>
-        <div class="stat-card">
             <div class="stat-value">{{ $tournament->participants->where('pivot.checked_in', true)->count() }}</div>
             <div class="stat-label">Ingecheckt</div>
         </div>

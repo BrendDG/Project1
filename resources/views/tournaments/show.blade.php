@@ -329,12 +329,6 @@
                 <span>🎮</span>
                 <span>{{ strtoupper($tournament->game_mode) }}</span>
             </div>
-            @if($tournament->prize_pool)
-                <div class="meta-item">
-                    <span>💰</span>
-                    <span>{{ $tournament->prize_pool }}</span>
-                </div>
-            @endif
         </div>
     </div>
 </div>
@@ -358,12 +352,7 @@
 
         <div class="tournament-details-grid">
             <div class="detail-card">
-                <div class="detail-label">Max Deelnemers</div>
-                <div class="detail-value">{{ $tournament->max_participants }}</div>
-            </div>
-
-            <div class="detail-card">
-                <div class="detail-label">Geregistreerd</div>
+                <div class="detail-label">Deelnemers</div>
                 <div class="detail-value">{{ $tournament->participants->count() }}</div>
             </div>
 
@@ -382,15 +371,7 @@
             <div class="registration-section">
                 <div class="registration-header">
                     <h3>Registratie</h3>
-                    @if($tournament->isFull())
-                        <span class="spots-remaining spots-full">VOL</span>
-                    @else
-                        <span class="spots-remaining">{{ $tournament->getAvailableSpots() }} plekken over</span>
-                    @endif
-                </div>
-
-                <div class="registration-progress">
-                    <div class="registration-progress-bar" style="width: {{ ($tournament->participants->count() / $tournament->max_participants) * 100 }}%"></div>
+                    <span class="spots-remaining">Open voor registratie</span>
                 </div>
 
                 @auth

@@ -294,8 +294,6 @@
                     <select name="filter" id="filter" onchange="document.getElementById('filterForm').submit()">
                         <option value="all" {{ $filter === 'all' ? 'selected' : '' }}>Alle Toernooien</option>
                         <option value="upcoming" {{ $filter === 'upcoming' ? 'selected' : '' }}>Binnenkort</option>
-                        <option value="ongoing" {{ $filter === 'ongoing' ? 'selected' : '' }}>Bezig</option>
-                        <option value="completed" {{ $filter === 'completed' ? 'selected' : '' }}>Afgelopen</option>
                         @auth
                             <option value="my-tournaments" {{ $filter === 'my-tournaments' ? 'selected' : '' }}>Mijn Toernooien</option>
                         @endauth
@@ -354,12 +352,6 @@
                                 <span class="meta-icon">⏰</span>
                                 <span>{{ \Carbon\Carbon::parse($tournament->start_time)->format('H:i') }} - {{ \Carbon\Carbon::parse($tournament->end_time)->format('H:i') }}</span>
                             </div>
-                            @if($tournament->prize_pool)
-                                <div class="meta-item">
-                                    <span class="meta-icon">💰</span>
-                                    <span>{{ $tournament->prize_pool }}</span>
-                                </div>
-                            @endif
                         </div>
 
                         <p class="tournament-description">
@@ -369,7 +361,7 @@
                         <div class="tournament-footer">
                             <div class="participants-info">
                                 <span>👥</span>
-                                <span>{{ $tournament->participants->count() }}/{{ $tournament->max_participants }}</span>
+                                <span>{{ $tournament->participants->count() }} deelnemers</span>
                             </div>
                             <div class="game-mode-badge">
                                 {{ strtoupper($tournament->game_mode) }}
