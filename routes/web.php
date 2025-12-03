@@ -21,6 +21,12 @@ Route::get('/', function () {
 Route::get('/nieuws', [NieuwsController::class, 'index'])->name('nieuws.index');
 Route::get('/nieuws/{nieuws}', [NieuwsController::class, 'show'])->name('nieuws.show');
 
+// Comment routes (vereisen authenticatie)
+Route::middleware('auth')->group(function () {
+    Route::post('/nieuws/{nieuws}/comments', [NieuwsController::class, 'storeComment'])->name('nieuws.comments.store');
+    Route::delete('/nieuws/{nieuws}/comments/{comment}', [NieuwsController::class, 'destroyComment'])->name('nieuws.comments.destroy');
+});
+
 // FAQ routes (publiek toegankelijk)
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 
