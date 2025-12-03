@@ -231,7 +231,7 @@
                 <div class="feature-icon">🏆</div>
                 <h3>Toernooien</h3>
                 <p>
-                    Bekijk aankomende toernooien, schrijf je in en volg de resultaten van professionele competities.
+                    Bekijk aankomende toernooien.
                 </p>
             </a>
 
