@@ -60,17 +60,32 @@
             align-items: center;
         }
 
+        .nav-links li {
+            display: inline-flex;
+            align-items: center;
+        }
+
         .nav-links a {
             color: #c0c0c0;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
             padding: 0.5rem 1rem;
+            white-space: nowrap;
         }
 
         .nav-links a:hover,
         .nav-links a.active {
             color: #4a9eff;
+        }
+
+        .nav-links form {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .nav-links button {
+            white-space: nowrap;
         }
 
         /* Main Content */
