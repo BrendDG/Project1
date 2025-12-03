@@ -367,37 +367,6 @@
             </div>
         </div>
 
-        @if($tournament->status === 'upcoming')
-            <div class="registration-section">
-                <div class="registration-header">
-                    <h3>Registratie</h3>
-                    <span class="spots-remaining">Open voor registratie</span>
-                </div>
-
-                @auth
-                    @if($isRegistered)
-                        <form method="POST" action="{{ route('tournaments.unregister', $tournament) }}" style="display: inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Weet je zeker dat je je wilt uitschrijven?')">
-                                Uitschrijven
-                            </button>
-                        </form>
-                        <p style="color: #10b981; margin-top: 15px; font-size: 14px;">✓ Je bent geregistreerd voor dit toernooi!</p>
-                    @else
-                        <form method="POST" action="{{ route('tournaments.register', $tournament) }}" style="display: inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-primary">
-                                Registreer voor dit Toernooi
-                            </button>
-                        </form>
-                    @endif
-                @else
-                    <a href="{{ route('login') }}" class="btn btn-primary">
-                        Log in om te registreren
-                    </a>
-                @endauth
-            </div>
-        @endif
     </div>
 
     @if($tournament->participants->count() > 0)
