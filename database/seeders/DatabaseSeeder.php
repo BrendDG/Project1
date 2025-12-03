@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         // Seed alle data
         $this->call([
+            UserSeeder::class,
             NieuwsSeeder::class,
             FaqSeeder::class,
         ]);

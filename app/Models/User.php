@@ -33,6 +33,7 @@ class User extends Authenticatable
         'mmr_dropshot',
         'mmr_snowday',
         'mmr_tournament',
+        'is_admin',
     ];
 
     /**
@@ -56,7 +57,16 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'birthday' => 'date',
+            'is_admin' => 'boolean',
         ];
+    }
+
+    /**
+     * Check if user is an admin
+     */
+    public function isAdmin(): bool
+    {
+        return $this->is_admin;
     }
 
     /**
