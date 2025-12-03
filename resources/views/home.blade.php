@@ -235,11 +235,11 @@
                 </p>
             </a>
 
-            <a href="#" class="feature-card">
+            <a href="{{ route('ranked.index') }}" class="feature-card">
                 <div class="feature-icon">📊</div>
                 <h3>Ranked Systeem</h3>
                 <p>
-                    Volg je rank progression van Bronze tot Grand Champion en SSL. Bekijk jouw MMR geschiedenis en climb de ladder!
+                    Bekijk de volledige MMR ranges voor alle ranks van Bronze tot Supersonic Legend. Ontdek bij welke MMR je promoveert of degradeert!
                 </p>
             </a>
 
