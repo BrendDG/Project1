@@ -13,6 +13,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // Geen test gebruikers - gebruikers registreren zelf via de registratie pagina
         // Admin gebruiker
         User::create([
             'name' => 'Admin User',
