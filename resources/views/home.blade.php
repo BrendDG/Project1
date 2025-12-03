@@ -227,7 +227,7 @@
                 </a>
             @endauth
 
-            <a href="#" class="feature-card">
+            <a href="{{ route('tournaments.index') }}" class="feature-card">
                 <div class="feature-icon">🏆</div>
                 <h3>Toernooien</h3>
                 <p>

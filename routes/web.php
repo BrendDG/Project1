@@ -7,6 +7,7 @@ use App\Http\Controllers\RankedController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PlayersController;
+use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\StorageController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -34,6 +35,18 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 Route::prefix('players')->name('players.')->group(function () {
     Route::get('/', [PlayersController::class, 'index'])->name('index');
     Route::get('/{user}', [PlayersController::class, 'show'])->name('show');
+});
+
+// Tournament routes (publiek toegankelijk)
+Route::prefix('tournaments')->name('tournaments.')->group(function () {
+    Route::get('/', [TournamentController::class, 'index'])->name('index');
+    Route::get('/{tournament}', [TournamentController::class, 'show'])->name('show');
+
+    // Registratie routes (vereisen authenticatie)
+    Route::middleware('auth')->group(function () {
+        Route::post('/{tournament}/register', [TournamentController::class, 'register'])->name('register');
+        Route::post('/{tournament}/unregister', [TournamentController::class, 'unregister'])->name('unregister');
+    });
 });
 
 // Storage route for serving uploaded files (fallback if storage:link doesn't work)
@@ -107,4 +120,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('/contact/{message}/toggle-read', [\App\Http\Controllers\Admin\AdminController::class, 'toggleReadStatus'])->name('contact.toggle-read');
     Route::delete('/contact/{message}', [\App\Http\Controllers\Admin\AdminController::class, 'destroyContactMessage'])->name('contact.destroy');
     Route::post('/contact/mark-all-read', [\App\Http\Controllers\Admin\AdminController::class, 'markAllAsRead'])->name('contact.mark-all-read');
+
+    // Tournament beheer
+    Route::resource('tournaments', \App\Http\Controllers\Admin\TournamentController::class);
+    Route::get('/tournaments/{tournament}/participants', [\App\Http\Controllers\Admin\TournamentController::class, 'participants'])->name('tournaments.participants');
 });

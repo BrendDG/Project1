@@ -8,6 +8,7 @@ use App\Models\Nieuws;
 use App\Models\FaqCategory;
 use App\Models\FaqItem;
 use App\Models\ContactMessage;
+use App\Models\Tournament;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -38,6 +39,11 @@ class AdminController extends Controller
         $totalContactMessages = ContactMessage::count();
         $unreadContactMessages = ContactMessage::where('is_read', false)->count();
 
+        // Tournament statistieken
+        $totalTournaments = Tournament::count();
+        $upcomingTournaments = Tournament::where('status', 'upcoming')->count();
+        $ongoingTournaments = Tournament::where('status', 'ongoing')->count();
+
         return view('admin.dashboard', compact(
             'totalUsers',
             'totalAdmins',
@@ -49,7 +55,10 @@ class AdminController extends Controller
             'totalFaqCategories',
             'totalFaqItems',
             'totalContactMessages',
-            'unreadContactMessages'
+            'unreadContactMessages',
+            'totalTournaments',
+            'upcomingTournaments',
+            'ongoingTournaments'
         ));
     }
 
