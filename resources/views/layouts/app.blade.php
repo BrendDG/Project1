@@ -56,6 +56,13 @@
             display: flex;
             gap: 2rem;
             list-style: none;
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+
+        .nav-links li {
+            display: inline-flex;
+            align-items: center;
         }
 
         .nav-links a {
@@ -64,11 +71,21 @@
             font-weight: 500;
             transition: color 0.3s ease;
             padding: 0.5rem 1rem;
+            white-space: nowrap;
         }
 
         .nav-links a:hover,
         .nav-links a.active {
             color: #4a9eff;
+        }
+
+        .nav-links form {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .nav-links button {
+            white-space: nowrap;
         }
 
         /* Main Content */
@@ -140,10 +157,22 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .nav-links {
                 gap: 1rem;
-                font-size: 0.9rem;
+                font-size: 0.85rem;
+            }
+
+            .nav-links a {
+                padding: 0.5rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 0.5rem;
+                font-size: 0.8rem;
+                flex-wrap: wrap;
             }
 
             main {
@@ -183,7 +212,6 @@
                     </li>
                 @else
                     <li><a href="{{ route('login') }}" class="{{ request()->is('login') ? 'active' : '' }}">Login</a></li>
-                    <li><a href="{{ route('register') }}" class="{{ request()->is('register') ? 'active' : '' }}">Registreer</a></li>
                 @endauth
             </ul>
         </nav>
