@@ -58,6 +58,22 @@
         <h3 style="color: {{ $unreadContactMessages > 0 ? '#ef4444' : '#10b981' }}; font-size: 2.5rem; margin-bottom: 0.5rem;">{{ $unreadContactMessages }}</h3>
         <p style="color: #9095a0;">Ongelezen</p>
     </div>
+
+    <!-- Stats Cards - Tournaments -->
+    <div class="card" style="text-align: center;">
+        <h3 style="color: #fbbf24; font-size: 2.5rem; margin-bottom: 0.5rem;">{{ $totalTournaments }}</h3>
+        <p style="color: #9095a0;">Totaal Toernooien</p>
+    </div>
+
+    <div class="card" style="text-align: center;">
+        <h3 style="color: #10b981; font-size: 2.5rem; margin-bottom: 0.5rem;">{{ $upcomingTournaments }}</h3>
+        <p style="color: #9095a0;">Binnenkort</p>
+    </div>
+
+    <div class="card" style="text-align: center;">
+        <h3 style="color: #f59e0b; font-size: 2.5rem; margin-bottom: 0.5rem;">{{ $ongoingTournaments }}</h3>
+        <p style="color: #9095a0;">Bezig</p>
+    </div>
 </div>
 
 <!-- Recent Users -->

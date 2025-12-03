@@ -245,4 +245,24 @@ class User extends Authenticatable
             default => '',
         };
     }
+
+    /**
+     * Get tournaments created by this user
+     * One-to-Many relationship
+     */
+    public function createdTournaments()
+    {
+        return $this->hasMany(Tournament::class, 'created_by');
+    }
+
+    /**
+     * Get tournaments this user is participating in
+     * Many-to-Many relationship
+     */
+    public function tournaments()
+    {
+        return $this->belongsToMany(Tournament::class, 'tournament_user')
+            ->withPivot('registered_at', 'placement', 'checked_in')
+            ->withTimestamps();
+    }
 }

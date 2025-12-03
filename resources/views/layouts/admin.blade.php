@@ -404,6 +404,12 @@
                     @endif
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.tournaments.index') }}" class="{{ request()->routeIs('admin.tournaments*') ? 'active' : '' }}">
+                    <span class="icon">🏆</span>
+                    <span>Toernooien</span>
+                </a>
+            </li>
 
             <div class="sidebar-divider"></div>
 
