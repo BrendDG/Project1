@@ -195,6 +195,7 @@
                 <li><a href="{{ route('home') }}" class="{{ request()->is('/') ? 'active' : '' }}">Home</a></li>
                 <li><a href="{{ route('nieuws.index') }}" class="{{ request()->is('nieuws*') ? 'active' : '' }}">Nieuws</a></li>
                 <li><a href="{{ route('players.index') }}" class="{{ request()->is('players*') && !request()->is('profile*') ? 'active' : '' }}">Spelers</a></li>
+                <li><a href="{{ route('tournaments.index') }}" class="{{ request()->is('tournaments*') ? 'active' : '' }}">Toernooien</a></li>
                 <li><a href="{{ route('faq.index') }}" class="{{ request()->is('faq*') ? 'active' : '' }}">FAQ</a></li>
                 <li><a href="{{ route('contact.index') }}" class="{{ request()->is('contact*') ? 'active' : '' }}">Contact</a></li>
 
