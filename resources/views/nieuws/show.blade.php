@@ -438,7 +438,7 @@
             </div>
         @else
             <div class="empty-comments">
-                <div class="empty-comments-icon">💬</div>
+                <div class="empty-comments-icon">Geen reacties</div>
                 <p>Nog geen reacties. Wees de eerste om te reageren!</p>
             </div>
         @endif

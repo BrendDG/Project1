@@ -7,7 +7,7 @@
 <div class="card">
     <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
         <h3>Alle Gebruikers</h3>
-        <a href="{{ route('admin.users.create') }}" class="btn btn-success">➕ Nieuwe Gebruiker</a>
+        <a href="{{ route('admin.users.create') }}" class="btn btn-success">Nieuwe Gebruiker</a>
     </div>
 
     <!-- Zoeken en Filteren -->
@@ -71,8 +71,8 @@
                         <td>{{ $user->created_at->format('d-m-Y') }}</td>
                         <td>
                             <div style="display: flex; gap: 0.5rem;">
-                                <a href="{{ route('profile.show', $user) }}" class="btn btn-secondary btn-sm" target="_blank">👁️</a>
-                                <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-primary btn-sm">✏️</a>
+                                <a href="{{ route('profile.show', $user) }}" class="btn btn-secondary btn-sm" target="_blank" title="Bekijken">Bekijken</a>
+                                <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-primary btn-sm" title="Bewerken">Bewerken</a>
 
                                 @if($user->id !== auth()->id())
                                     <form method="POST" action="{{ route('admin.users.toggle-admin', $user) }}" style="display: inline;">
@@ -82,7 +82,7 @@
                                             class="btn {{ $user->is_admin ? 'btn-warning' : 'btn-success' }} btn-sm"
                                             onclick="return confirm('Weet je zeker dat je de admin status van {{ $user->name }} wilt wijzigen?')"
                                         >
-                                            {{ $user->is_admin ? '⬇️' : '⬆️' }}
+                                            {{ $user->is_admin ? 'Demote' : 'Promote' }}
                                         </button>
                                     </form>
 
@@ -94,7 +94,7 @@
                                             class="btn btn-danger btn-sm"
                                             onclick="return confirm('Weet je zeker dat je {{ $user->name }} wilt verwijderen? Dit kan niet ongedaan worden gemaakt!')"
                                         >
-                                            🗑️
+                                            Verwijderen
                                         </button>
                                     </form>
                                 @endif

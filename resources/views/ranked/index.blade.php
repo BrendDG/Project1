@@ -222,14 +222,14 @@
 
 @section('content')
 <div class="page-header">
-    <h1>📊 Ranked Systeem</h1>
+    <h1>Ranked Systeem</h1>
     <p>Ontdek de MMR ranges voor alle ranks in Rocket League</p>
 </div>
 
 <div class="ranked-container">
     <!-- Info Box -->
     <div class="info-box">
-        <h3>ℹ️ Over MMR (Match Making Rating)</h3>
+        <h3>Over MMR (Match Making Rating)</h3>
         <p>
             Je MMR bepaalt je rank in Rocket League. Wanneer je wint, gaat je MMR omhoog. Wanneer je verliest, gaat je MMR omlaag.
         </p>
@@ -247,13 +247,13 @@
     <!-- Game Mode Tabs -->
     <div class="gamemode-tabs">
         <button class="tab-button active" onclick="showGamemode('duel')">
-            🎮 Ranked Duel 1v1
+            Ranked Duel 1v1
         </button>
         <button class="tab-button" onclick="showGamemode('doubles')">
-            👥 Ranked Doubles 2v2
+            Ranked Doubles 2v2
         </button>
         <button class="tab-button" onclick="showGamemode('standard')">
-            👨‍👩‍👦 Ranked Standard 3v3
+            Ranked Standard 3v3
         </button>
     </div>
 

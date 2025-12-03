@@ -141,7 +141,7 @@
 
 @section('content')
 <div class="page-header">
-    <h1>📰 Laatste Nieuws</h1>
+    <h1>Laatste Nieuws</h1>
     <p>Blijf op de hoogte van de nieuwste Rocket League updates en evenementen</p>
 </div>
 
