@@ -383,8 +383,6 @@
                             </button>
                         </form>
                         <p style="color: #10b981; margin-top: 15px; font-size: 14px;">✓ Je bent geregistreerd voor dit toernooi!</p>
-                    @elseif($tournament->isFull())
-                        <button class="btn btn-disabled" disabled>Toernooi is vol</button>
                     @else
                         <form method="POST" action="{{ route('tournaments.register', $tournament) }}" style="display: inline;">
                             @csrf
