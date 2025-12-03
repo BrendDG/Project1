@@ -24,14 +24,12 @@ class NieuwsController extends Controller
      */
     public function show($id)
     {
-        $nieuws = Nieuws::where('id', $id)
-            ->where('published_at', '<=', now())
-            ->firstOrFail();
-
-        // Load comments with user relationship, ordered by newest first
-        $nieuws->load(['comments' => function($query) {
+        $nieuws = Nieuws::with(['comments' => function($query) {
             $query->with('user')->latest();
-        }]);
+        }])
+        ->where('id', $id)
+        ->where('published_at', '<=', now())
+        ->firstOrFail();
 
         return view('nieuws.show', compact('nieuws'));
     }
