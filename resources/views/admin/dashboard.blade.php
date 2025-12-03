@@ -32,11 +32,6 @@
         <p style="color: #9095a0;">Gepubliceerd</p>
     </div>
 
-    <div class="card" style="text-align: center;">
-        <h3 style="color: #f59e0b; font-size: 2.5rem; margin-bottom: 0.5rem;">{{ $scheduledNieuws }}</h3>
-        <p style="color: #9095a0;">Gepland</p>
-    </div>
-
     <!-- Stats Cards - FAQ -->
     <div class="card" style="text-align: center;">
         <h3 style="color: #8b5cf6; font-size: 2.5rem; margin-bottom: 0.5rem;">{{ $totalFaqCategories }}</h3>
@@ -70,10 +65,6 @@
         <p style="color: #9095a0;">Binnenkort</p>
     </div>
 
-    <div class="card" style="text-align: center;">
-        <h3 style="color: #f59e0b; font-size: 2.5rem; margin-bottom: 0.5rem;">{{ $ongoingTournaments }}</h3>
-        <p style="color: #9095a0;">Bezig</p>
-    </div>
 </div>
 
 <!-- Recent Users -->

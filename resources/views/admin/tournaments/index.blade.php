@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
-@section('title', 'Toernooien Beheer - Admin')
+@section('title', 'Toernooien Beheer')
+@section('page-title', 'Toernooien Beheer')
 
 @section('styles')
 <style>
@@ -204,19 +205,11 @@
 @endsection
 
 @section('content')
-<div class="admin-container">
-    <div class="admin-header">
-        <h1>Toernooien Beheer</h1>
-        <a href="{{ route('admin.tournaments.create') }}" class="btn btn-primary">+ Nieuw Toernooi</a>
+<div class="card">
+    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+        <h3>Alle Toernooien</h3>
+        <a href="{{ route('admin.tournaments.create') }}" class="btn btn-success">Nieuw Toernooi</a>
     </div>
-
-    @if(session('success'))
-        <x-alert type="success" :message="session('success')" />
-    @endif
-
-    @if(session('error'))
-        <x-alert type="error" :message="session('error')" />
-    @endif
 
     <div class="table-container">
         <table>

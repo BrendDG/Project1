@@ -90,7 +90,7 @@
                         <td>
                             <div style="display: flex; gap: 0.5rem;">
                                 <a href="{{ route('admin.contact.show', $msg) }}" class="btn btn-primary btn-sm" title="Bekijken">
-                                    👁️
+                                    Bekijken
                                 </a>
 
                                 <form method="POST" action="{{ route('admin.contact.toggle-read', $msg) }}" style="display: inline;">
@@ -101,7 +101,7 @@
                                 </form>
 
                                 <a href="mailto:{{ $msg->email }}?subject=Re: {{ urlencode($msg->subject) }}" class="btn btn-success btn-sm" title="Reageren">
-                                    ↩️
+                                    Reageren
                                 </a>
 
                                 <form method="POST" action="{{ route('admin.contact.destroy', $msg) }}" style="display: inline;">
@@ -113,7 +113,7 @@
                                         onclick="return confirm('Weet je zeker dat je dit bericht wilt verwijderen?')"
                                         title="Verwijderen"
                                     >
-                                        🗑️
+                                        Verwijderen
                                     </button>
                                 </form>
                             </div>

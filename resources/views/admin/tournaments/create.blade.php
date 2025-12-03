@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
-@section('title', 'Nieuw Toernooi - Admin')
+@section('title', 'Nieuw Toernooi')
+@section('page-title', 'Nieuw Toernooi Aanmaken')
 
 @section('styles')
 <style>

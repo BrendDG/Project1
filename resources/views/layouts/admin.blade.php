@@ -389,7 +389,6 @@
             <li>
                 <a href="{{ route('admin.contact.messages') }}" class="{{ request()->routeIs('admin.contact*') ? 'active' : '' }}">
                     <span class="icon">Contact</span>
-                    <span>Berichten</span>
                     @php
                         $unreadCount = \App\Models\ContactMessage::where('is_read', false)->count();
                     @endphp

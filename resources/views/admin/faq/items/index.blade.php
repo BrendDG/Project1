@@ -8,8 +8,8 @@
     <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
         <h3>FAQ Items</h3>
         <div style="display: flex; gap: 0.5rem;">
-            <a href="{{ route('admin.faq.categories') }}" class="btn btn-secondary">📂 Categorieën</a>
-            <a href="{{ route('admin.faq.items.create') }}" class="btn btn-success">➕ Nieuw FAQ Item</a>
+            <a href="{{ route('admin.faq.categories') }}" class="btn btn-secondary"> Categorieën</a>
+            <a href="{{ route('admin.faq.items.create') }}" class="btn btn-success"> Nieuw FAQ Item</a>
         </div>
     </div>
 
@@ -71,7 +71,7 @@
                         <td>{{ $item->order }}</td>
                         <td>
                             <div style="display: flex; gap: 0.5rem;">
-                                <a href="{{ route('admin.faq.items.edit', $item) }}" class="btn btn-primary btn-sm" title="Bewerken">✏️</a>
+                                <a href="{{ route('admin.faq.items.edit', $item) }}" class="btn btn-primary btn-sm" title="Bewerken">Bewerken</a>
 
                                 <form method="POST" action="{{ route('admin.faq.items.destroy', $item) }}" style="display: inline;">
                                     @csrf
@@ -82,7 +82,7 @@
                                         onclick="return confirm('Weet je zeker dat je dit FAQ item wilt verwijderen?')"
                                         title="Verwijderen"
                                     >
-                                        🗑️
+                                        Verwijderen
                                     </button>
                                 </form>
                             </div>
@@ -127,10 +127,10 @@
 
 @if($categories->isEmpty())
 <div style="background: #f59e0b; color: #000; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem;">
-    <h4 style="margin-bottom: 0.5rem;">⚠️ Geen categorieën gevonden</h4>
+    <h4 style="margin-bottom: 0.5rem;"> Geen categorieën gevonden</h4>
     <p style="margin-bottom: 1rem;">Je moet eerst minstens één FAQ categorie aanmaken voordat je FAQ items kunt toevoegen.</p>
     <a href="{{ route('admin.faq.categories.create') }}" class="btn" style="background: #000; color: #fff;">
-        ➕ Maak Eerste Categorie Aan
+         Maak Eerste Categorie Aan
     </a>
 </div>
 @endif

@@ -202,7 +202,6 @@
         <h2>Wat We Bieden</h2>
         <div class="features-grid">
             <a href="{{ route('nieuws.index') }}" class="feature-card">
-                <div class="feature-icon">Nieuws</div>
                 <h3>Laatste Nieuws</h3>
                 <p>
                     Blijf op de hoogte van de nieuwste patches, updates, esports evenementen en community highlights.
@@ -211,7 +210,6 @@
 
             @auth
                 <a href="{{ route('profile.show', auth()->user()) }}" class="feature-card">
-                    <div class="feature-icon">Profiel</div>
                     <h3>Mijn Profiel</h3>
                     <p>
                         Bekijk en bewerk je profiel, deel je stats en laat zien welke rank je hebt bereikt.
@@ -228,7 +226,6 @@
             @endauth
 
             <a href="{{ route('tournaments.index') }}" class="feature-card">
-                <div class="feature-icon">Toernooien</div>
                 <h3>Toernooien</h3>
                 <p>
                     Bekijk aankomende toernooien.
@@ -236,7 +233,6 @@
             </a>
 
             <a href="{{ route('ranked.index') }}" class="feature-card">
-                <div class="feature-icon">Ranked</div>
                 <h3>Ranked Systeem</h3>
                 <p>
                     Bekijk de volledige MMR ranges voor alle ranks van Bronze tot Supersonic Legend. Ontdek bij welke MMR je promoveert of degradeert!
@@ -244,15 +240,13 @@
             </a>
 
             <a href="{{ route('faq.index') }}" class="feature-card">
-                <div class="feature-icon">FAQ</div>
-                <h3>FAQ & Guides</h3>
+                <h3>FAQ</h3>
                 <p>
                     Leer nieuwe mechanics, ontdek tips & tricks en krijg antwoorden op al je Rocket League vragen.
                 </p>
             </a>
 
             <a href="{{ route('contact.index') }}" class="feature-card">
-                <div class="feature-icon">Contact</div>
                 <h3>Community</h3>
                 <p>
                     Maak contact met andere spelers, vorm teams en deel je Rocket League ervaringen.
