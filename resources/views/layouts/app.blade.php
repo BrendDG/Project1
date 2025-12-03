@@ -56,6 +56,8 @@
             display: flex;
             gap: 2rem;
             list-style: none;
+            flex-wrap: nowrap;
+            align-items: center;
         }
 
         .nav-links a {
@@ -140,10 +142,22 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .nav-links {
                 gap: 1rem;
-                font-size: 0.9rem;
+                font-size: 0.85rem;
+            }
+
+            .nav-links a {
+                padding: 0.5rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 0.5rem;
+                font-size: 0.8rem;
+                flex-wrap: wrap;
             }
 
             main {
