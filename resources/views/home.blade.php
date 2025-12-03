@@ -217,7 +217,6 @@
                 </a>
             @else
                 <a href="{{ route('register') }}" class="feature-card">
-                    <div class="feature-icon">Profiel</div>
                     <h3>Speler Profielen</h3>
                     <p>
                         Creëer je eigen profiel, deel je stats en laat zien welke rank je hebt bereikt.
