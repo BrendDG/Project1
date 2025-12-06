@@ -274,4 +274,30 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+
+    /**
+     * Get messages sent by this user
+     * One-to-Many relationship
+     */
+    public function sentMessages()
+    {
+        return $this->hasMany(PrivateMessage::class, 'sender_id');
+    }
+
+    /**
+     * Get messages received by this user
+     * One-to-Many relationship
+     */
+    public function receivedMessages()
+    {
+        return $this->hasMany(PrivateMessage::class, 'receiver_id');
+    }
+
+    /**
+     * Get unread messages count
+     */
+    public function getUnreadMessagesCountAttribute(): int
+    {
+        return $this->receivedMessages()->unread()->count();
+    }
 }
