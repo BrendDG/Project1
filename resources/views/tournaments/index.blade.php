@@ -281,7 +281,7 @@
 
 @section('content')
 <div class="tournaments-hero">
-    <h1>🏆 Toernooien</h1>
+    <h1>Toernooien</h1>
     <p>Doe mee aan spannende Rocket League toernooien en bewijs dat jij de beste bent!</p>
 </div>
 
@@ -333,7 +333,7 @@
                         @if($tournament->image)
                             <img src="{{ asset($tournament->image) }}" alt="{{ $tournament->name }}">
                         @else
-                            🏆
+                            Toernooi
                         @endif
                         <div class="tournament-status {{ $tournament->getStatusBadgeClass() }}">
                             {{ $tournament->getStatusLabel() }}
@@ -345,11 +345,11 @@
 
                         <div class="tournament-meta">
                             <div class="meta-item">
-                                <span class="meta-icon">📅</span>
+                                <span class="meta-icon">Datum:</span>
                                 <span>{{ $tournament->tournament_date->format('d M Y') }}</span>
                             </div>
                             <div class="meta-item">
-                                <span class="meta-icon">⏰</span>
+                                <span class="meta-icon">Tijd:</span>
                                 <span>{{ \Carbon\Carbon::parse($tournament->start_time)->format('H:i') }} - {{ \Carbon\Carbon::parse($tournament->end_time)->format('H:i') }}</span>
                             </div>
                         </div>
@@ -360,8 +360,8 @@
 
                         <div class="tournament-footer">
                             <div class="participants-info">
-                                <span>👥</span>
-                                <span>{{ $tournament->participants->count() }} deelnemers</span>
+                                <span>Deelnemers:</span>
+                                <span>{{ $tournament->participants->count() }}</span>
                             </div>
                             <div class="game-mode-badge">
                                 {{ strtoupper($tournament->game_mode) }}
@@ -377,7 +377,7 @@
         </div>
     @else
         <div class="empty-state">
-            <div class="empty-state-icon">🏆</div>
+            <div class="empty-state-icon">Geen toernooien</div>
             <h3>Geen toernooien gevonden</h3>
             <p>Er zijn momenteel geen toernooien die aan je filters voldoen.</p>
         </div>

@@ -45,7 +45,7 @@
                                         onclick="return confirm('Weet je zeker dat je deze categorie wilt verwijderen?{{ $category->faq_items_count > 0 ? '\n\nLET OP: Deze categorie bevat nog ' . $category->faq_items_count . ' items!' : '' }}')"
                                         title="Verwijderen"
                                     >
-                                        🗑️
+                                        Verwijderen
                                     </button>
                                 </form>
                             </div>
@@ -66,7 +66,7 @@
 </div>
 
 <div style="background: #151b2e; padding: 1.5rem; border-radius: 8px; border: 1px solid #2a3150; margin-top: 1.5rem;">
-    <h4 style="color: #4a9eff; margin-bottom: 1rem;">ℹ️ Over Volgorde</h4>
+    <h4 style="color: #4a9eff; margin-bottom: 1rem;"> Over Volgorde</h4>
     <p style="color: #9095a0; margin-bottom: 0.5rem;">
         Het volgorde nummer bepaalt in welke volgorde de categorieën worden weergegeven op de FAQ pagina.
     </p>

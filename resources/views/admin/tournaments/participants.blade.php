@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
-@section('title', 'Deelnemers - ' . $tournament->name)
+@section('title', 'Deelnemers')
+@section('page-title', 'Toernooi Deelnemers - ' . $tournament->name)
 
 @section('styles')
 <style>

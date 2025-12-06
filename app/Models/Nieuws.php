@@ -30,4 +30,13 @@ class Nieuws extends Model
         return $query->where('published_at', '<=', now())
                      ->orderBy('published_at', 'desc');
     }
+
+    /**
+     * Get all comments for this nieuws
+     * One-to-Many relationship
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

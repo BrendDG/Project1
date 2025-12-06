@@ -10,7 +10,7 @@
         <div style="display: flex; gap: 0.5rem;">
             <a href="{{ route('admin.contact.messages') }}" class="btn btn-secondary">← Terug naar Overzicht</a>
             <a href="mailto:{{ $message->email }}?subject=Re: {{ urlencode($message->subject) }}" class="btn btn-success">
-                ↩️ Reageer via Email
+                 Reageer via Email
             </a>
         </div>
     </div>
@@ -60,7 +60,7 @@
     <!-- Acties -->
     <div style="padding: 1.5rem; border-top: 1px solid #2a3150; display: flex; gap: 1rem;">
         <a href="mailto:{{ $message->email }}?subject=Re: {{ urlencode($message->subject) }}&body={{ urlencode("\n\n---\nIn antwoord op je bericht:\n\n" . $message->message) }}" class="btn btn-success">
-            📧 Reageer via Email
+             Reageer via Email
         </a>
 
         <form method="POST" action="{{ route('admin.contact.toggle-read', $message) }}" style="display: inline;">
@@ -78,7 +78,7 @@
                 class="btn btn-danger"
                 onclick="return confirm('Weet je zeker dat je dit bericht wilt verwijderen?')"
             >
-                🗑️ Verwijderen
+                🗑 Verwijderen
             </button>
         </form>
     </div>

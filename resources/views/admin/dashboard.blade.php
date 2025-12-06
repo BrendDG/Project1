@@ -32,11 +32,6 @@
         <p style="color: #9095a0;">Gepubliceerd</p>
     </div>
 
-    <div class="card" style="text-align: center;">
-        <h3 style="color: #f59e0b; font-size: 2.5rem; margin-bottom: 0.5rem;">{{ $scheduledNieuws }}</h3>
-        <p style="color: #9095a0;">Gepland</p>
-    </div>
-
     <!-- Stats Cards - FAQ -->
     <div class="card" style="text-align: center;">
         <h3 style="color: #8b5cf6; font-size: 2.5rem; margin-bottom: 0.5rem;">{{ $totalFaqCategories }}</h3>
@@ -70,10 +65,6 @@
         <p style="color: #9095a0;">Binnenkort</p>
     </div>
 
-    <div class="card" style="text-align: center;">
-        <h3 style="color: #f59e0b; font-size: 2.5rem; margin-bottom: 0.5rem;">{{ $ongoingTournaments }}</h3>
-        <p style="color: #9095a0;">Bezig</p>
-    </div>
 </div>
 
 <!-- Recent Users -->
@@ -178,25 +169,25 @@
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
         <a href="{{ route('admin.users.create') }}" class="btn btn-success">
-            ➕ Nieuwe Gebruiker
+            Nieuwe Gebruiker
         </a>
         <a href="{{ route('admin.nieuws.create') }}" class="btn btn-success">
-            📰 Nieuw Nieuwsitem
+            Nieuw Nieuwsitem
         </a>
         <a href="{{ route('admin.faq.items.create') }}" class="btn btn-success">
-            ❓ Nieuw FAQ Item
+            Nieuw FAQ Item
         </a>
         <a href="{{ route('admin.users') }}" class="btn btn-primary">
-            👥 Alle Gebruikers
+            Alle Gebruikers
         </a>
         <a href="{{ route('admin.nieuws') }}" class="btn btn-primary">
-            📰 Alle Nieuwsitems
+            Alle Nieuwsitems
         </a>
         <a href="{{ route('admin.faq.items') }}" class="btn btn-primary">
-            ❓ FAQ Items
+            FAQ Items
         </a>
         <a href="{{ route('admin.contact.messages') }}" class="btn btn-primary">
-            📧 Contact Berichten
+            Contact Berichten
             @if($unreadContactMessages > 0)
                 <span style="background: #ef4444; color: #fff; padding: 0.15rem 0.5rem; border-radius: 10px; font-size: 0.75rem; margin-left: 0.25rem;">
                     {{ $unreadContactMessages }}
@@ -204,7 +195,7 @@
             @endif
         </a>
         <a href="{{ route('home') }}" class="btn btn-secondary">
-            🏠 Terug naar Site
+            Terug naar Site
         </a>
     </div>
 </div>

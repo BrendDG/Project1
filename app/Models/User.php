@@ -265,4 +265,13 @@ class User extends Authenticatable
             ->withPivot('registered_at', 'placement', 'checked_in')
             ->withTimestamps();
     }
+
+    /**
+     * Get all comments by this user
+     * One-to-Many relationship
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

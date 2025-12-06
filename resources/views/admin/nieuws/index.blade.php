@@ -7,7 +7,7 @@
 <div class="card">
     <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
         <h3>Alle Nieuwsitems</h3>
-        <a href="{{ route('admin.nieuws.create') }}" class="btn btn-success">➕ Nieuw Nieuwsitem</a>
+        <a href="{{ route('admin.nieuws.create') }}" class="btn btn-success">Nieuw Nieuwsitem</a>
     </div>
 
     <!-- Zoeken en Filteren -->
@@ -75,8 +75,8 @@
                         </td>
                         <td>
                             <div style="display: flex; gap: 0.5rem;">
-                                <a href="{{ route('nieuws.show', $item) }}" class="btn btn-secondary btn-sm" target="_blank" title="Bekijken">👁️</a>
-                                <a href="{{ route('admin.nieuws.edit', $item) }}" class="btn btn-primary btn-sm" title="Bewerken">✏️</a>
+                                <a href="{{ route('nieuws.show', $item) }}" class="btn btn-secondary btn-sm" target="_blank" title="Bekijken">Bekijken</a>
+                                <a href="{{ route('admin.nieuws.edit', $item) }}" class="btn btn-primary btn-sm" title="Bewerken">Bewerken</a>
 
                                 <form method="POST" action="{{ route('admin.nieuws.destroy', $item) }}" style="display: inline;">
                                     @csrf
@@ -87,7 +87,7 @@
                                         onclick="return confirm('Weet je zeker dat je dit nieuwsitem wilt verwijderen? Dit kan niet ongedaan worden gemaakt!')"
                                         title="Verwijderen"
                                     >
-                                        🗑️
+                                        Verwijderen
                                     </button>
                                 </form>
                             </div>

@@ -128,7 +128,7 @@
 
 @section('content')
 <div class="page-header">
-    <h1>❓ Veelgestelde Vragen</h1>
+    <h1>Veelgestelde Vragen</h1>
     <p>Vind antwoorden op de meest gestelde vragen over Rocket League</p>
 </div>
 

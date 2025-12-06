@@ -150,7 +150,7 @@
 
 @section('content')
 <div class="page-header">
-    <h1>💬 Contact</h1>
+    <h1>Contact</h1>
     <p>Heb je een vraag of opmerking? Laat het ons weten!</p>
 </div>
 

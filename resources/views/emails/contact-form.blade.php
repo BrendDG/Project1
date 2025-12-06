@@ -100,14 +100,14 @@
     <div class="email-container">
         <!-- Header -->
         <div class="header">
-            <h1>📧 Nieuw Contactbericht</h1>
+            <h1>Nieuw Contactbericht</h1>
             <p style="margin: 10px 0 0 0; color: #c0c0c0;">Via Rocket League Community Website</p>
         </div>
 
         <!-- Content -->
         <div class="content">
             <div class="alert-box">
-                <strong>⚠️ Let op:</strong> Dit bericht is verzonden via het contactformulier op de website. Reageer direct op deze email om contact op te nemen met de afzender.
+                <strong>Let op:</strong> Dit bericht is verzonden via het contactformulier op de website. Reageer direct op deze email om contact op te nemen met de afzender.
             </div>
 
             <!-- Afzender Info -->
@@ -145,7 +145,7 @@
             <!-- Action Button -->
             <div style="text-align: center; margin-top: 30px;">
                 <a href="mailto:{{ $contactMessage->email }}?subject=Re: {{ urlencode($contactMessage->subject) }}" class="button">
-                    📨 Reageer op dit bericht
+                    Reageer op dit bericht
                 </a>
             </div>
         </div>

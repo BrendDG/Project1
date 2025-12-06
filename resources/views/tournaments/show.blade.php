@@ -318,15 +318,15 @@
         <h1>{{ $tournament->name }}</h1>
         <div class="tournament-meta-row">
             <div class="meta-item">
-                <span>📅</span>
+                <span>Datum:</span>
                 <span>{{ $tournament->tournament_date->format('d M Y') }}</span>
             </div>
             <div class="meta-item">
-                <span>⏰</span>
+                <span>Tijd:</span>
                 <span>{{ \Carbon\Carbon::parse($tournament->start_time)->format('H:i') }} - {{ \Carbon\Carbon::parse($tournament->end_time)->format('H:i') }}</span>
             </div>
             <div class="meta-item">
-                <span>🎮</span>
+                <span>Game Mode:</span>
                 <span>{{ strtoupper($tournament->game_mode) }}</span>
             </div>
         </div>

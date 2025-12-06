@@ -368,32 +368,27 @@
         <ul class="sidebar-menu">
             <li>
                 <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                    <span class="icon">📊</span>
-                    <span>Dashboard</span>
+                    <span class="icon">Dashboard</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('admin.users') }}" class="{{ request()->routeIs('admin.users*') ? 'active' : '' }}">
-                    <span class="icon">👥</span>
-                    <span>Gebruikers</span>
+                    <span class="icon">Gebruikers</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('admin.nieuws') }}" class="{{ request()->routeIs('admin.nieuws*') ? 'active' : '' }}">
-                    <span class="icon">📰</span>
-                    <span>Nieuws</span>
+                    <span class="icon">Nieuws</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('admin.faq.items') }}" class="{{ request()->routeIs('admin.faq*') ? 'active' : '' }}">
-                    <span class="icon">❓</span>
-                    <span>FAQ</span>
+                    <span class="icon">FAQ</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('admin.contact.messages') }}" class="{{ request()->routeIs('admin.contact*') ? 'active' : '' }}">
-                    <span class="icon">📧</span>
-                    <span>Contact Berichten</span>
+                    <span class="icon">Contact</span>
                     @php
                         $unreadCount = \App\Models\ContactMessage::where('is_read', false)->count();
                     @endphp
@@ -406,8 +401,7 @@
             </li>
             <li>
                 <a href="{{ route('admin.tournaments.index') }}" class="{{ request()->routeIs('admin.tournaments*') ? 'active' : '' }}">
-                    <span class="icon">🏆</span>
-                    <span>Toernooien</span>
+                    <span class="icon">Toernooien</span>
                 </a>
             </li>
 
@@ -415,8 +409,7 @@
 
             <li>
                 <a href="{{ route('home') }}">
-                    <span class="icon">🏠</span>
-                    <span>Terug naar site</span>
+                    <span class="icon">Home</span>
                 </a>
             </li>
         </ul>
