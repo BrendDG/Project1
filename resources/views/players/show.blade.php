@@ -221,6 +221,13 @@
         @if($user->about_me)
             <div class="profile-bio">{{ e($user->about_me) }}</div>
         @endif
+        @auth
+            @if(auth()->id() !== $user->id)
+                <a href="{{ route('messages.create', ['to' => $user->id]) }}" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">
+                    Stuur bericht
+                </a>
+            @endif
+        @endauth
     </div>
 </div>
 

@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             NieuwsSeeder::class,
             FaqSeeder::class,
             TournamentSeeder::class,
+            PrivateMessageSeeder::class,
         ]);
     }
 }
