@@ -34,9 +34,9 @@
         padding: 1.5rem;
         text-align: center;
         transition: all 0.3s ease;
-        text-decoration: none;
         color: inherit;
-        display: block;
+        display: flex;
+        flex-direction: column;
     }
 
     .player-card:hover {
@@ -44,6 +44,54 @@
         background: #151b2e;
         transform: translateY(-5px);
         box-shadow: 0 10px 30px rgba(74, 158, 255, 0.2);
+    }
+
+    .player-card-link {
+        text-decoration: none;
+        color: inherit;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .player-card-actions {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #2a3150;
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+
+    .btn-sm {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+    }
+
+    .btn-message {
+        background: #3b82f6;
+        color: white;
+    }
+
+    .btn-message:hover {
+        background: #2563eb;
+    }
+
+    .btn-view {
+        background: transparent;
+        color: #4a9eff;
+        border: 1px solid #4a9eff;
+    }
+
+    .btn-view:hover {
+        background: #4a9eff;
+        color: white;
     }
 
     .player-avatar {
@@ -200,43 +248,55 @@
 @if($players->count() > 0)
     <div class="players-grid">
         @foreach($players as $player)
-            <a href="{{ route('players.show', $player) }}" class="player-card">
-                <img
-                    src="{{ $player->profile_photo_url }}"
-                    alt="{{ e($player->display_name) }}"
-                    class="player-avatar"
-                    onerror="this.src='{{ asset('default-avatar.png') }}'"
-                >
-                <div class="player-name">{{ e($player->display_name) }}</div>
-                @if($player->username)
-                    <div class="player-username">@\{{ e($player->username) }}</div>
-                @endif
-
-                {{-- Show top 3 ranks --}}
-                <div class="player-ranks">
-                    @php
-                        $rankedModes = collect([
-                            ['mmr' => $player->mmr_1v1, 'label' => '1v1'],
-                            ['mmr' => $player->mmr_2v2, 'label' => '2v2'],
-                            ['mmr' => $player->mmr_3v3, 'label' => '3v3'],
-                        ])
-                        ->filter(fn($mode) => $mode['mmr'] !== null)
-                        ->sortByDesc('mmr')
-                        ->take(3);
-                    @endphp
-
-                    @if($rankedModes->count() > 0)
-                        @foreach($rankedModes as $mode)
-                            <span class="rank-badge">
-                                <img src="{{ $player->getRankImage($mode['mmr']) }}" alt="Rank">
-                                {{ $mode['label'] }}
-                            </span>
-                        @endforeach
-                    @else
-                        <span class="rank-badge">Unranked</span>
+            <div class="player-card">
+                <a href="{{ route('players.show', $player) }}" class="player-card-link">
+                    <img
+                        src="{{ $player->profile_photo_url }}"
+                        alt="{{ e($player->display_name) }}"
+                        class="player-avatar"
+                        onerror="this.src='{{ asset('default-avatar.png') }}'"
+                    >
+                    <div class="player-name">{{ e($player->display_name) }}</div>
+                    @if($player->username)
+                        <div class="player-username">@\{{ e($player->username) }}</div>
                     @endif
-                </div>
-            </a>
+
+                    {{-- Show top 3 ranks --}}
+                    <div class="player-ranks">
+                        @php
+                            $rankedModes = collect([
+                                ['mmr' => $player->mmr_1v1, 'label' => '1v1'],
+                                ['mmr' => $player->mmr_2v2, 'label' => '2v2'],
+                                ['mmr' => $player->mmr_3v3, 'label' => '3v3'],
+                            ])
+                            ->filter(fn($mode) => $mode['mmr'] !== null)
+                            ->sortByDesc('mmr')
+                            ->take(3);
+                        @endphp
+
+                        @if($rankedModes->count() > 0)
+                            @foreach($rankedModes as $mode)
+                                <span class="rank-badge">
+                                    <img src="{{ $player->getRankImage($mode['mmr']) }}" alt="Rank">
+                                    {{ $mode['label'] }}
+                                </span>
+                            @endforeach
+                        @else
+                            <span class="rank-badge">Unranked</span>
+                        @endif
+                    </div>
+                </a>
+
+                @auth
+                    @if(auth()->id() !== $player->id)
+                        <div class="player-card-actions">
+                            <a href="{{ route('messages.create', ['to' => $player->id]) }}" class="btn-sm btn-message">
+                                Stuur bericht
+                            </a>
+                        </div>
+                    @endif
+                @endauth
+            </div>
         @endforeach
     </div>
 

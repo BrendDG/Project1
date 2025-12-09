@@ -13,11 +13,12 @@ class PrivateMessageSeeder extends Seeder
      */
     public function run(): void
     {
-        // Haal alle gebruikers op
-        $users = User::all();
+        // Haal alle gebruikers op (behalve admin)
+        $users = User::where('is_admin', false)->get();
 
         if ($users->count() < 2) {
-            $this->command->info('Niet genoeg gebruikers om berichten te seeden. Minimaal 2 gebruikers nodig.');
+            $this->command->info('Niet genoeg gebruikers om berichten te seeden. Minimaal 2 niet-admin gebruikers nodig.');
+            $this->command->info('Registreer minimaal 2 gebruikers via de registratie pagina en voer dan "php artisan db:seed --class=PrivateMessageSeeder" uit.');
             return;
         }
 

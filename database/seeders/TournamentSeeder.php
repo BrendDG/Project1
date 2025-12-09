@@ -174,10 +174,12 @@ class TournamentSeeder extends Seeder
         foreach ($allTournaments->take(5) as $tournament) {
             $randomUsers = $users->random(min($users->count(), rand(5, 15)));
             foreach ($randomUsers as $user) {
-                $tournament->participants()->attach($user->id, [
-                    'registered_at' => now(),
-                    'checked_in' => rand(0, 1) == 1,
-                ]);
+                if (!$tournament->participants()->where('user_id', $user->id)->exists()) {
+                    $tournament->participants()->attach($user->id, [
+                        'registered_at' => now(),
+                        'checked_in' => rand(0, 1) == 1,
+                    ]);
+                }
             }
         }
     }
