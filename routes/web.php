@@ -82,6 +82,18 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update'); // Update own profile
 });
 
+// Private Messages routes (vereisen authenticatie)
+Route::middleware('auth')->prefix('messages')->name('messages.')->group(function () {
+    Route::get('/', [\App\Http\Controllers\MessageController::class, 'index'])->name('index');
+    Route::get('/sent', [\App\Http\Controllers\MessageController::class, 'sent'])->name('sent');
+    Route::get('/create', [\App\Http\Controllers\MessageController::class, 'create'])->name('create');
+    Route::post('/', [\App\Http\Controllers\MessageController::class, 'store'])->name('store');
+    Route::get('/{message}', [\App\Http\Controllers\MessageController::class, 'show'])->name('show');
+    Route::delete('/{message}', [\App\Http\Controllers\MessageController::class, 'destroy'])->name('destroy');
+    Route::post('/{message}/mark-as-read', [\App\Http\Controllers\MessageController::class, 'markAsRead'])->name('mark-as-read');
+    Route::post('/mark-all-as-read', [\App\Http\Controllers\MessageController::class, 'markAllAsRead'])->name('mark-all-as-read');
+});
+
 // Admin routes (alleen voor admins)
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     // Dashboard

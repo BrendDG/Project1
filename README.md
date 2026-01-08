@@ -1,61 +1,392 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Rocket League Community Platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Een volledige Laravel-gebaseerde community website voor Rocket League spelers met gebruikersbeheer, privéberichten, admin functionaliteit en meer.
 
-## About Laravel
+## Inhoudsopgave
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [Over het Project](#over-het-project)
+- [Features](#features)
+- [Technologieën](#technologieën)
+- [Installatie](#installatie)
+- [Configuratie](#configuratie)
+- [Database Setup](#database-setup)
+- [Test Accounts](#test-accounts)
+- [Documentatie](#documentatie)
+- [Project Structuur](#project-structuur)
+- [Development](#development)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Over het Project
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Deze applicatie is een community platform voor Rocket League spelers waar gebruikers:
+- Profielen kunnen aanmaken en beheren
+- Privéberichten kunnen versturen naar andere spelers
+- Nieuws en toernooien kunnen volgen
+- Contact kunnen opnemen via een contactformulier
+- FAQ's kunnen raadplegen
 
-## Learning Laravel
+Het platform bevat ook een volledig admin systeem voor gebruikersbeheer.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Features
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Gebruikersfunctionaliteit
+- **Authenticatie**
+  - Registratie met email verificatie
+  - Login met "Remember me" functionaliteit
+  - Wachtwoord reset via email
+  - Veilige uitlog functionaliteit
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Profielbeheer**
+  - Publieke profielpagina's
+  - Profielfoto upload (max 2MB)
+  - Username en verjaardag
+  - "Over mij" sectie (max 1000 karakters)
+  - Bewerkbare profielen (alleen voor eigenaar)
 
-## Laravel Sponsors
+- **Privéberichten Systeem**
+  - Privéberichten versturen naar andere gebruikers
+  - Inbox met ongelezen berichten badge
+  - Verzonden berichten overzicht
+  - Berichten markeren als gelezen
+  - Direct berichten sturen vanaf profielpagina's
+  - Paginatie en sortering
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Community Features**
+  - Nieuws overzicht
+  - Toernooien informatie
+  - Commentaar functionaliteit
+  - FAQ systeem
+  - Contact formulier
 
-### Premium Partners
+### Admin Functionaliteit
+- **Admin Dashboard**
+  - Statistieken (totaal gebruikers, admins)
+  - Recent geregistreerde gebruikers
+  - Snelle acties
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- **Gebruikersbeheer**
+  - Overzicht van alle gebruikers
+  - Zoeken en filteren
+  - Gebruikers aanmaken/bewerken/verwijderen
+  - Admin rechten toekennen/intrekken
+  - Bescherming tegen zelf-degradatie
 
-## Contributing
+### Beveiliging
+- CSRF bescherming op alle formulieren
+- XSS bescherming via Blade templating
+- Server-side en client-side validatie
+- Authorization middleware voor protected routes
+- Veilige wachtwoord hashing (bcrypt)
+- Admin middleware voor restricted functionaliteit
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Technologieën
 
-## Code of Conduct
+- **Backend:** Laravel 12 (PHP 8.2+)
+- **Database:** MySQL/MariaDB
+- **Frontend:** Blade templating, Vanilla JavaScript
+- **CSS:** TailwindCSS
+- **Build Tool:** Vite
+- **Package Manager:** Composer, NPM
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Installatie
 
-## Security Vulnerabilities
+### Vereisten
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- PHP >= 8.2
+- Composer
+- Node.js & NPM
+- MySQL/MariaDB
+- Git
 
-## License
+### Stappen
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. **Clone de repository**
+```bash
+git clone https://github.com/your-username/project1.git
+cd project1
+```
+
+2. **Installeer PHP dependencies**
+```bash
+composer install
+```
+
+3. **Installeer Node dependencies**
+```bash
+npm install
+```
+
+4. **Environment configuratie**
+```bash
+cp .env.example .env
+```
+
+5. **Genereer application key**
+```bash
+php artisan key:generate
+```
+
+6. **Configureer database in `.env`**
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database_name
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
+
+7. **Run migrations en seeders**
+```bash
+php artisan migrate:fresh --seed
+```
+
+8. **Link storage voor file uploads**
+```bash
+php artisan storage:link
+```
+
+9. **Build frontend assets**
+```bash
+npm run build
+```
+
+10. **Start development server**
+```bash
+php artisan serve
+```
+
+Bezoek http://localhost:8000 in je browser.
+
+## Configuratie
+
+### Mail Setup (Optioneel)
+
+Voor wachtwoord reset functionaliteit, configureer mail in `.env`:
+
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=your_username
+MAIL_PASSWORD=your_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="noreply@rocketleague.local"
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+Voor development kan je [Mailhog](https://github.com/mailhog/MailHog) of [Mailtrap](https://mailtrap.io) gebruiken.
+
+Zie [EMAIL_SETUP.md](EMAIL_SETUP.md) voor gedetailleerde instructies.
+
+## Database Setup
+
+### Migrations
+
+Het project bevat migrations voor:
+- Users tabel met profile velden
+- Private messages tabel
+- Nieuws tabel
+- Comments tabel
+- Tournaments tabel
+- FAQ categories en items
+- Contact messages
+
+### Seeders
+
+Na `php artisan db:seed` worden de volgende data aangemaakt:
+- Admin gebruiker
+- Test gebruikers
+- Voorbeeld nieuws items
+- FAQ items
+- Private messages (voor testing)
+
+## Test Accounts
+
+### Admin Account
+```
+Email: admin@rocketleague.com
+Wachtwoord: admin123
+```
+
+### Normale Gebruikers
+```
+Email: john@example.com
+Wachtwoord: password
+
+Email: jane@example.com
+Wachtwoord: password
+
+Email: bob@example.com
+Wachtwoord: password
+```
+
+## Documentatie
+
+Het project bevat uitgebreide documentatie in de volgende bestanden:
+
+- **[SETUP.md](SETUP.md)** - Setup instructies en technische details
+- **[ADMIN_SYSTEM.md](ADMIN_SYSTEM.md)** - Admin systeem documentatie
+- **[PRIVEBERICHT_FUNCTIONALITEIT.md](PRIVEBERICHT_FUNCTIONALITEIT.md)** - Privébericht systeem documentatie
+- **[EMAIL_SETUP.md](EMAIL_SETUP.md)** - Email configuratie handleiding
+
+## Project Structuur
+
+```
+project1/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── Admin/
+│   │   │   │   └── AdminController.php
+│   │   │   ├── Auth/
+│   │   │   │   ├── LoginController.php
+│   │   │   │   ├── RegisterController.php
+│   │   │   │   └── ForgotPasswordController.php
+│   │   │   ├── MessageController.php
+│   │   │   ├── ProfileController.php
+│   │   │   └── ...
+│   │   └── Middleware/
+│   │       └── AdminMiddleware.php
+│   └── Models/
+│       ├── User.php
+│       ├── PrivateMessage.php
+│       ├── Nieuws.php
+│       ├── Comment.php
+│       ├── Tournament.php
+│       └── ...
+├── database/
+│   ├── migrations/
+│   └── seeders/
+├── resources/
+│   └── views/
+│       ├── layouts/
+│       │   ├── app.blade.php
+│       │   ├── auth.blade.php
+│       │   └── admin.blade.php
+│       ├── components/
+│       │   ├── alert.blade.php
+│       │   └── message-card.blade.php
+│       ├── admin/
+│       ├── auth/
+│       ├── messages/
+│       ├── profile/
+│       └── ...
+├── routes/
+│   └── web.php
+├── public/
+└── storage/
+```
+
+## Development
+
+### Composer Scripts
+
+Het project bevat handige Composer scripts:
+
+```bash
+# Complete setup (install, migrate, seed, build)
+composer setup
+
+# Start development servers (PHP, queue, logs, Vite)
+composer dev
+
+# Run tests
+composer test
+```
+
+### Development Server
+
+```bash
+# Laravel development server
+php artisan serve
+
+# Vite development server (in een aparte terminal)
+npm run dev
+```
+
+### Database Management
+
+```bash
+# Run migrations
+php artisan migrate
+
+# Reset database en seed opnieuw
+php artisan migrate:fresh --seed
+
+# Run specifieke seeder
+php artisan db:seed --class=UserSeeder
+```
+
+### Cache Management
+
+```bash
+# Clear all caches
+php artisan cache:clear
+php artisan config:clear
+php artisan view:clear
+php artisan route:clear
+
+# Optimize for production
+php artisan optimize
+```
+
+## Routes Overzicht
+
+### Publieke Routes
+- `/` - Home pagina
+- `/nieuws` - Nieuws overzicht
+- `/toernooien` - Toernooien
+- `/faq` - FAQ
+- `/contact` - Contact formulier
+- `/profile/{user}` - Publieke profielpagina
+
+### Authenticatie Routes
+- `/login` - Login
+- `/register` - Registratie
+- `/forgot-password` - Wachtwoord vergeten
+- `/reset-password/{token}` - Wachtwoord reset
+
+### Protected Routes (ingelogd)
+- `/profile/{user}/edit` - Profiel bewerken
+- `/messages` - Inbox
+- `/messages/sent` - Verzonden berichten
+- `/messages/create` - Nieuw bericht
+- `/messages/{message}` - Bericht bekijken
+
+### Admin Routes (alleen admins)
+- `/admin/dashboard` - Admin dashboard
+- `/admin/users` - Gebruikersbeheer
+- `/admin/users/create` - Nieuwe gebruiker
+- `/admin/users/{user}/edit` - Gebruiker bewerken
+
+## Beveiliging
+
+### Belangrijke Security Features
+
+- **CSRF Protection:** Alle POST/PUT/DELETE requests zijn beschermd
+- **XSS Protection:** Automatische output escaping via Blade
+- **SQL Injection Protection:** Eloquent ORM met prepared statements
+- **Password Hashing:** Bcrypt hashing voor wachtwoorden
+- **Authorization:** Middleware voor route bescherming
+- **Validation:** Server-side en client-side validatie
+- **File Upload Validation:** Type en grootte checks voor uploads
+
+### Best Practices
+
+- Gebruik altijd `{{ }}` syntax in Blade templates
+- Gebruik `@csrf` in alle formulieren
+- Valideer alle user input server-side
+- Gebruik middleware voor authorization checks
+- Gebruik Eloquent ORM in plaats van raw queries
+
+## Licentie
+
+Dit project is ontwikkeld voor educatieve doeleinden.
+
+## Contact
+
+Voor vragen of problemen, gebruik het contact formulier op de website of open een issue op GitHub.
+
+---
+
+**Gemaakt met Laravel 12** | [Documentatie](https://laravel.com/docs) | [GitHub](https://github.com/your-username/project1)

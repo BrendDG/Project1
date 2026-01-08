@@ -199,6 +199,14 @@
                 <li><a href="{{ route('contact.index') }}" class="{{ request()->is('contact*') ? 'active' : '' }}">Contact</a></li>
 
                 @auth
+                    <li><a href="{{ route('messages.index') }}" class="{{ request()->is('messages*') ? 'active' : '' }}">
+                        Berichten
+                        @if(auth()->user()->unread_messages_count > 0)
+                            <span style="background: #ef4444; color: white; border-radius: 50%; padding: 0.15rem 0.5rem; font-size: 0.75rem; margin-left: 0.25rem;">
+                                {{ auth()->user()->unread_messages_count }}
+                            </span>
+                        @endif
+                    </a></li>
                     <li><a href="{{ route('profile.show', auth()->user()) }}" class="{{ request()->is('profile*') ? 'active' : '' }}">Mijn Profiel</a></li>
                     @if(auth()->user()->isAdmin())
                         <li><a href="{{ route('admin.dashboard') }}" class="{{ request()->is('admin*') ? 'active' : '' }}" style="color: #f59e0b;">Admin Panel</a></li>

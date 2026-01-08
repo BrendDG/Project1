@@ -202,9 +202,15 @@
                     </div>
                 </div>
 
-                @if (auth()->check() && auth()->id() === $user->id)
-                    <a href="{{ route('profile.edit', $user) }}" class="edit-button">Profiel bewerken</a>
-                @endif
+                @auth
+                    @if (auth()->id() === $user->id)
+                        <a href="{{ route('profile.edit', $user) }}" class="edit-button">Profiel bewerken</a>
+                    @else
+                        <a href="{{ route('messages.create', ['to' => $user->id]) }}" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">
+                            Stuur bericht
+                        </a>
+                    @endif
+                @endauth
             </div>
         </div>
 
