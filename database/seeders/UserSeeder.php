@@ -13,7 +13,6 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Alleen admin gebruiker - andere gebruikers registreren via de registratie pagina
         // Admin gebruiker
         User::updateOrCreate(
             ['email' => 'admin@ehb.be'],
@@ -22,6 +21,30 @@ class UserSeeder extends Seeder
                 'username' => 'admin',
                 'password' => Hash::make('Password!321'),
                 'is_admin' => true,
+                'email_verified_at' => now(),
+            ]
+        );
+
+        // Test gebruiker 1
+        User::updateOrCreate(
+            ['email' => 'Test@gmail.com'],
+            [
+                'name' => 'Zen',
+                'username' => 'Zen',
+                'password' => Hash::make('Test1234'),
+                'is_admin' => false,
+                'email_verified_at' => now(),
+            ]
+        );
+
+        // Test gebruiker 2
+        User::updateOrCreate(
+            ['email' => 'drali@gmail.com'],
+            [
+                'name' => 'Drali',
+                'username' => 'Drali',
+                'password' => Hash::make('drali1234'),
+                'is_admin' => false,
                 'email_verified_at' => now(),
             ]
         );

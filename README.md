@@ -194,8 +194,8 @@ Het project bevat migrations voor:
 ### Seeders
 
 Na `php artisan db:seed` worden de volgende data aangemaakt:
-- Admin gebruiker
-- Test gebruikers
+- Admin gebruiker (admin@ehb.be)
+- 2 Test gebruikers (Zen en Drali)
 - Voorbeeld nieuws items
 - FAQ items
 - Private messages (voor testing)
@@ -210,7 +210,19 @@ Wachtwoord: Password!321
 ```
 
 ### Normale Gebruikers
-Normale gebruikers kunnen zelf geregistreerd worden via de registratie pagina.
+```
+Gebruiker 1:
+Naam: Zen
+Email: Test@gmail.com
+Wachtwoord: Test1234
+
+Gebruiker 2:
+Naam: Drali
+Email: drali@gmail.com
+Wachtwoord: drali1234
+```
+
+Andere gebruikers kunnen zelf geregistreerd worden via de registratie pagina.
 
 ## Documentatie
 
