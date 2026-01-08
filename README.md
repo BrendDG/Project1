@@ -204,21 +204,13 @@ Na `php artisan db:seed` worden de volgende data aangemaakt:
 
 ### Admin Account
 ```
-Email: admin@rocketleague.com
-Wachtwoord: admin123
+Username: admin
+Email: admin@ehb.be
+Wachtwoord: Password!321
 ```
 
 ### Normale Gebruikers
-```
-Email: john@example.com
-Wachtwoord: password
-
-Email: jane@example.com
-Wachtwoord: password
-
-Email: bob@example.com
-Wachtwoord: password
-```
+Normale gebruikers kunnen zelf geregistreerd worden via de registratie pagina.
 
 ## Documentatie
 
@@ -378,6 +370,15 @@ php artisan optimize
 - Valideer alle user input server-side
 - Gebruik middleware voor authorization checks
 - Gebruik Eloquent ORM in plaats van raw queries
+
+## Bronvermeldingen
+
+Dit project maakt gebruik van de volgende frameworks en libraries:
+- [Laravel Framework](https://laravel.com) - PHP web application framework
+- [TailwindCSS](https://tailwindcss.com) - CSS framework
+- [Vite](https://vitejs.dev) - Frontend build tool
+
+Alle code is zelf geschreven volgens de Laravel best practices en documentatie.
 
 ## Licentie
 
